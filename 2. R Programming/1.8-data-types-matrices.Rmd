@@ -1,0 +1,9 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Matrices
+
+Matrices are vectors with a dimension attribute. The dimension attribute is itself an integer vector of length 2 (nrow, ncol)
+
