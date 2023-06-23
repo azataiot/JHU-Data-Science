@@ -1,0 +1,141 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Creating Vectors
+
+The c() function can be used to create vectors of objects.
+
+```{r}
+x <- c(0.5,0.6) # numeric
+x <- c(TRUE,FALSE) # logical 
+x <- c(T,F) # logical 
+x <- c("a","b","c") # character 
+x <- 9:29 # integer (range)
+x <- c(1+0i,2+4i) # complex
+```
+
+```{r}
+x <- vector("numeric", length = 10)
+x
+```
+
+## Mixing Objects
+
+When different objects are mixed in a vector, coercion occurs so that every element in the vector is of the same class.
+
+```{r}
+y <- c(1.7, "a") ## character
+y
+```
+
+```{r}
+y <- c(TRUE, 2) ## numeric
+y
+```
+```{r}
+y <- c("a", TRUE) ## character
+y
+```
+
+## Explicit Coercion
+
+Objects can be explicitly coerced from one class to another using the as.* functions, if available.
+
+```{r}
+x<-0:6
+class(x)
+```
+```{r}
+as.numeric(x)
+```
+```{r}
+as.logical(x)
+```
+```{r}
+as.character(x)
+```
+
+Nonsensical coercion results in NAs.
+
+```{r}
+x <- c("a", "b", "c")
+as.numeric(x)
+```
+```{r}
+as.logical(x)
+```
+
+```{r}
+as.complex(x)
+```
+
+## Matrices
+
+Matrices are vectors with a dimension attribute. The dimension attribute is itself an integer vector of length 2 (nrow, ncol)
+
+```{r}
+m <- matrix(nrow = 2, ncol = 3)
+m
+```
+
+```{r}
+dim(m)
+```
+```{r}
+attributes(m)
+```
+
+## Matrices (cont’d)
+
+Matrices are constructed column-wise, so entries can be thought of starting in the “upper left” corner and running down the columns.
+
+```{r}
+m <- matrix(1:6, nrow = 2, ncol = 3)
+m
+```
+
+Matrices can also be created directly from vectors by adding a dimension attribute.
+
+```{r}
+m<-1:10
+m
+```
+```{r}
+dim(m) <- c(2, 5)
+m
+```
+
+## cbind-ing and rbind-ing
+
+Matrices can be created by column-binding or row-binding with cbind() and rbind().
+
+```{r}
+x<-1:3
+y<-10:12
+```
+
+```{r}
+x
+```
+```{r}
+y
+```
+```{r}
+cbind(x,y)
+```
+
+```{r}
+rbind(x,y)
+```
+
+## Lists
+
+Lists are a special type of vector that can contain elements of different classes. Lists are a very important data type in R and you should get to know them well.
+
+```{r}
+x <- list(1, "a", TRUE, 1 + 4i)
+x
+```
+

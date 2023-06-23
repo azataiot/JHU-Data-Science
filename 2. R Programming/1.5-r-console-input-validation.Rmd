@@ -1,0 +1,44 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+x <- 1
+```
+
+```{r}
+print(x)
+```
+
+```{r}
+x
+```
+```{r}
+msg <- "hello"
+```
+
+```{r}
+x <-
+```
+
+```{r}
+x <- 5
+```
+
+```{r}
+x
+```
+
+```{r}
+print(x)
+```
+
+```{r}
+x <- 1:20
+x
+```
+
+
