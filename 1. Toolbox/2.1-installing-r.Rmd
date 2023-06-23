@@ -1,0 +1,10 @@
+---
+title: "Installing R"
+output: html_notebook
+---
+
+```{r}
+mean(23,43)
+```
+
+

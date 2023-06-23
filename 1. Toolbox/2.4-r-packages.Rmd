@@ -1,0 +1,22 @@
+---
+title: "2.4 R Packages"
+output: html_notebook
+---
+
+```{r}
+help(package = "devtools")
+```
+
+
+```{r}
+sessionInfo()
+```
+
+```{r}
+help(package = "KernSmooth")
+```
+
+```{r}
+library(KernSmooth)
+```
+
