@@ -1,0 +1,38 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Missing Values
+
+Missing values are denoted by NA or NaN for undefined mathematical operations.
+
+- is.na() is used to test objects if they are NA
+
+- is.nan() is used to test for NaN
+
+- NA values have a class also, so there are integer NA, character NA, etc.
+
+- A NaN value is also NA but the converse is not true
+
+
+```{r}
+x<-c(1,2,NA,10,3)
+is.na(x)
+```
+
+```{r}
+is.nan(x)
+```
+```{r}
+x<-c(1,2,NaN,NA,4)
+is.na(x)
+```
+
+```{r}
+is.nan(x)
+```
+
+	1.	NA: This stands for “Not Available”. NA is used when the value of a variable is unknown or missing in general. It can be used for any data type in R, including logical, integer, real, complex, character, and raw.
+	2.	NaN: This stands for “Not a Number”. NaN is a special value that is primarily used in numerical computations. It’s the result of an undefined mathematical operation. For example, 0/0 or Inf - Inf in R will give you NaN.
+
