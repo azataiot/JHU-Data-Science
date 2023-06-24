@@ -1,0 +1,62 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Subsetting - Removing Missing Values
+
+A common task is to remove missing values (NAs).
+
+```{r}
+x<-c(1,2,NA,4,NA,5)
+x
+```
+
+
+
+
+```{r}
+bad <- is.na(x)
+bad
+```
+
+```{r}
+x[!bad]
+```
+
+What if there are multiple things and you want to take the subset with no missing values?
+
+```{r}
+x<-c(1,2,NA,4,NA,5)
+x
+```
+```{r}
+y <- c("a", "b", NA, "d", NA, "f")
+y
+```
+```{r}
+good <- complete.cases(x, y)
+good
+```
+```{r}
+x[good]
+```
+```{r}
+y[good]
+```
+```{r}
+airquality[1:6, ]
+```
+
+```{r}
+good <- complete.cases(airquality)
+good
+```
+```{r}
+airquality[good, ]
+```
+
+```{r}
+airquality[good, ][1:6, ]
+```
+
