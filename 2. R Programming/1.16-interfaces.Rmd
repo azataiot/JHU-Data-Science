@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Connections: Interfaces to the Outside World
+
+Data are read in using connection interfaces. Connections can be made to files (most common) or to other more exotic things.
+
+- file, opens a connection to a file    
+- gzfile, opens a connection to a file compressed with gzip   
+- bzfile, opens a connection to a file compressed with bzip2    
+- url, opens a connection to a webpage    
+
+## File Connections
+
+```{r}
+str(file)
+```
+
+description is the name of the file · open is a code indicating
+- “r”readonly
+- “w”writing(andinitializinganewfile)
+- “a”appending
+- “rb”,“wb”,“ab”reading,writing,orappendinginbinarymode(Windows)
+
+## Connections
+
+In general, connections are powerful tools that let you navigate files or other external objects. In practice, we often don’t need to deal with the connection interface directly.
+
+```{r}
+con <- file("foo.txt", "r") 
+data <- read.csv(con) 
+close(con)
+```
+
+is the same as
+
+```{r}
+data <- read.csv("foo.txt")
+```
+
+## Reading Lines of a Text File
+
+```{r}
+con <- gzfile("words.gz")
+x <- readLines(con, 10)
+x
+```
+
+
+
