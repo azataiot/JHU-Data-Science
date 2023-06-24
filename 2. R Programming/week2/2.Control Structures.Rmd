@@ -71,4 +71,56 @@ if(<condition2>) {
 }
 ```
 
+## Control Structures - For loops
 
+for loops take an interator variable and assign it successive values from a sequence or vector. For loops are most commonly used for iterating over the elements of an object (list, vector, etc.)
+
+```{r}
+for(i in 1:10) {
+  print(i)
+}
+```
+
+This loop takes the i variable and in each iteration of the loop gives it values 1, 2, 3, ..., 10, and then exits.
+
+These three loops have the same behavior.
+
+```{r}
+x <- c("a", "b", "c", "d")
+
+for (i in 1:4) {
+  print(x[i])
+}
+```
+
+
+```{r}
+for(i in seq_along(x)) {
+  print(x[i])
+}
+```
+
+```{r}
+for(letter in x) {
+  print(letter)
+}
+```
+
+```{r}
+for(i in 1:4) print(x[i])
+```
+
+### Nested for loops
+
+for loops can be nested.
+
+```{r}
+x <- matrix(1:6, 2, 3)
+for (i in seq_len(nrow(x))) {
+  for (j in seq_len(ncol(x))) {
+    print(x[i, j])
+  }
+}
+```
+
+Be careful with nesting though. Nesting beyond 2–3 levels is often very difficult to read/understand.

@@ -1819,12 +1819,128 @@ functions or longer expresisons.</p>
 if(&lt;condition2&gt;) {
 
 }</code></pre>
+</div>
+</div>
+<div id="control-structures---for-loops" class="section level2">
+<h2>Control Structures - For loops</h2>
+<p>for loops take an interator variable and assign it successive values
+from a sequence or vector. For loops are most commonly used for
+iterating over the elements of an object (list, vector, etc.)</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGkgaW4gMToxMCkge1xuICBwcmludChpKVxufVxuYGBgIn0= -->
+<pre class="r"><code>for(i in 1:10) {
+  print(i)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDFcblsxXSAyXG5bMV0gM1xuWzFdIDRcblsxXSA1XG5bMV0gNlxuWzFdIDdcblsxXSA4XG5bMV0gOVxuWzFdIDEwXG4ifQ== -->
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>This loop takes the i variable and in each iteration of the loop
+gives it values 1, 2, 3, …, 10, and then exits.</p>
+<p>These three loops have the same behavior.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBjKFwiYVwiLCBcImJcIiwgXCJjXCIsIFwiZFwiKVxuXG5mb3IgKGkgaW4gMTo0KSB7XG4gIHByaW50KHhbaV0pXG59XG5gYGAifQ== -->
+<pre class="r"><code>x &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)
+
+for (i in 1:4) {
+  print(x[i])
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYVwiXG5bMV0gXCJiXCJcblsxXSBcImNcIlxuWzFdIFwiZFwiXG4ifQ== -->
+<pre><code>[1] &quot;a&quot;
+[1] &quot;b&quot;
+[1] &quot;c&quot;
+[1] &quot;d&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGkgaW4gc2VxX2Fsb25nKHgpKSB7XG4gIHByaW50KHhbaV0pXG59XG5gYGAifQ== -->
+<pre class="r"><code>for(i in seq_along(x)) {
+  print(x[i])
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYVwiXG5bMV0gXCJiXCJcblsxXSBcImNcIlxuWzFdIFwiZFwiXG4ifQ== -->
+<pre><code>[1] &quot;a&quot;
+[1] &quot;b&quot;
+[1] &quot;c&quot;
+[1] &quot;d&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGxldHRlciBpbiB4KSB7XG4gIHByaW50KGxldHRlcilcbn1cbmBgYCJ9 -->
+<pre class="r"><code>for(letter in x) {
+  print(letter)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYVwiXG5bMV0gXCJiXCJcblsxXSBcImNcIlxuWzFdIFwiZFwiXG4ifQ== -->
+<pre><code>[1] &quot;a&quot;
+[1] &quot;b&quot;
+[1] &quot;c&quot;
+[1] &quot;d&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZm9yKGkgaW4gMTo0KSBwcmludCh4W2ldKVxuYGBgIn0= -->
+<pre class="r"><code>for(i in 1:4) print(x[i])</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYVwiXG5bMV0gXCJiXCJcblsxXSBcImNcIlxuWzFdIFwiZFwiXG4ifQ== -->
+<pre><code>[1] &quot;a&quot;
+[1] &quot;b&quot;
+[1] &quot;c&quot;
+[1] &quot;d&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<div id="nested-for-loops" class="section level3">
+<h3>Nested for loops</h3>
+<p>for loops can be nested.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBtYXRyaXgoMTo2LCAyLCAzKVxuZm9yIChpIGluIHNlcV9sZW4obnJvdyh4KSkpIHtcbiAgZm9yIChqIGluIHNlcV9sZW4obmNvbCh4KSkpIHtcbiAgICBwcmludCh4W2ksIGpdKVxuICB9XG59XG5gYGAifQ== -->
+<pre class="r"><code>x &lt;- matrix(1:6, 2, 3)
+for (i in seq_len(nrow(x))) {
+  for (j in seq_len(ncol(x))) {
+    print(x[i, j])
+  }
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDFcblsxXSAzXG5bMV0gNVxuWzFdIDJcblsxXSA0XG5bMV0gNlxuIn0= -->
+<pre><code>[1] 1
+[1] 3
+[1] 5
+[1] 2
+[1] 4
+[1] 6</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Be careful with nesting though. Nesting beyond 2–3 levels is often
+very difficult to read/understand.</p>
 <!-- rnb-text-end -->
 </div>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBDb250cm9sIFN0cnVjdHVyZXMgCgoKCiMjIENvbnRyb2wgU3RydWN0dXJlcyAtIEludHJvZHVjdGlvbgoKQ29udHJvbCBzdHJ1Y3R1cmVzIGluIFIgYWxsb3cgeW91IHRvIGNvbnRyb2wgdGhlIGZsb3cgb2YgZXhlY3V0aW9uIG9mIHRoZSBwcm9ncmFtLCBkZXBlbmRpbmcgb24gcnVudGltZSBjb25kaXRpb25zLiBDb21tb24gc3RydWN0dXJlcyBhcmUKwrcgaWYsIGVsc2U6IHRlc3RpbmcgYSBjb25kaXRpb24KwrcgZm9yOiBleGVjdXRlIGEgbG9vcCBhIGZpeGVkIG51bWJlciBvZiB0aW1lcwrCtyB3aGlsZTogZXhlY3V0ZSBhIGxvb3Agd2hpbGUgYSBjb25kaXRpb24gaXMgdHJ1ZSDCtyByZXBlYXQ6IGV4ZWN1dGUgYW4gaW5maW5pdGUgbG9vcArCtyBicmVhazogYnJlYWsgdGhlIGV4ZWN1dGlvbiBvZiBhIGxvb3AKwrcgbmV4dDogc2tpcCBhbiBpbnRlcmF0aW9uIG9mIGEgbG9vcArCtyByZXR1cm46IGV4aXQgYSBmdW5jdGlvbgpNb3N0IGNvbnRyb2wgc3RydWN0dXJlcyBhcmUgbm90IHVzZWQgaW4gaW50ZXJhY3RpdmUgc2Vzc2lvbnMsIGJ1dCByYXRoZXIgd2hlbiB3cml0aW5nIGZ1bmN0aW9ucyBvciBsb25nZXIgZXhwcmVzaXNvbnMuCgojIyBDb250cm9sIFN0cnVjdHVyZXMgLSBJZi1lbHNlCgpgYGAKaWYoPGNvbmRpdGlvbj4pIHsKIyMgZG8gc29tZXRoaW5nCn1lbHNlewojIyBkbyBzb21ldGhpbmcgZWxzZQp9IGlmKDxjb25kaXRpb24xPikgewojIyBkbyBzb21ldGhpbmcKfSBlbHNlIGlmKDxjb25kaXRpb24yPikgewojIyBkbyBzb21ldGhpbmcgZGlmZmVyZW50Cn1lbHNlewojIyBkbyBzb21ldGhpbmcgZGlmZmVyZW50Cn0KYGBgCiMjIyBpZgoKVGhpcyBpcyBhIHZhbGlkIGlmL2Vsc2Ugc3RydWN0dXJlLgpgYGB7cn0KeCA8LTAKYGBgCgoKYGBge3J9CmlmKHg+MykgewogIHkgPC0gMTAKfSBlbHNlewogIHkgPC0gMAp9CmBgYAoKU28gaXMgdGhpcyBvbmUuCgpgYGB7cn0KeSA8LSBpZiAoeCA+IDMpIHsKICAxMAp9IGVsc2V7CiAgMAp9CmBgYAoKT2YgY291cnNlLCB0aGUgZWxzZSBjbGF1c2UgaXMgbm90IG5lY2Vzc2FyeS4KCmBgYAppZig8Y29uZGl0aW9uMT4pIHsgCgp9CgppZig8Y29uZGl0aW9uMj4pIHsKCn0KYGBgCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBDb250cm9sIFN0cnVjdHVyZXMgCgoKCiMjIENvbnRyb2wgU3RydWN0dXJlcyAtIEludHJvZHVjdGlvbgoKQ29udHJvbCBzdHJ1Y3R1cmVzIGluIFIgYWxsb3cgeW91IHRvIGNvbnRyb2wgdGhlIGZsb3cgb2YgZXhlY3V0aW9uIG9mIHRoZSBwcm9ncmFtLCBkZXBlbmRpbmcgb24gcnVudGltZSBjb25kaXRpb25zLiBDb21tb24gc3RydWN0dXJlcyBhcmUKwrcgaWYsIGVsc2U6IHRlc3RpbmcgYSBjb25kaXRpb24KwrcgZm9yOiBleGVjdXRlIGEgbG9vcCBhIGZpeGVkIG51bWJlciBvZiB0aW1lcwrCtyB3aGlsZTogZXhlY3V0ZSBhIGxvb3Agd2hpbGUgYSBjb25kaXRpb24gaXMgdHJ1ZSDCtyByZXBlYXQ6IGV4ZWN1dGUgYW4gaW5maW5pdGUgbG9vcArCtyBicmVhazogYnJlYWsgdGhlIGV4ZWN1dGlvbiBvZiBhIGxvb3AKwrcgbmV4dDogc2tpcCBhbiBpbnRlcmF0aW9uIG9mIGEgbG9vcArCtyByZXR1cm46IGV4aXQgYSBmdW5jdGlvbgpNb3N0IGNvbnRyb2wgc3RydWN0dXJlcyBhcmUgbm90IHVzZWQgaW4gaW50ZXJhY3RpdmUgc2Vzc2lvbnMsIGJ1dCByYXRoZXIgd2hlbiB3cml0aW5nIGZ1bmN0aW9ucyBvciBsb25nZXIgZXhwcmVzaXNvbnMuCgojIyBDb250cm9sIFN0cnVjdHVyZXMgLSBJZi1lbHNlCgpgYGAKaWYoPGNvbmRpdGlvbj4pIHsKIyMgZG8gc29tZXRoaW5nCn1lbHNlewojIyBkbyBzb21ldGhpbmcgZWxzZQp9IGlmKDxjb25kaXRpb24xPikgewojIyBkbyBzb21ldGhpbmcKfSBlbHNlIGlmKDxjb25kaXRpb24yPikgewojIyBkbyBzb21ldGhpbmcgZGlmZmVyZW50Cn1lbHNlewojIyBkbyBzb21ldGhpbmcgZGlmZmVyZW50Cn0KYGBgCiMjIyBpZgoKVGhpcyBpcyBhIHZhbGlkIGlmL2Vsc2Ugc3RydWN0dXJlLgpgYGB7cn0KeCA8LTAKYGBgCgoKYGBge3J9CmlmKHg+MykgewogIHkgPC0gMTAKfSBlbHNlewogIHkgPC0gMAp9CmBgYAoKU28gaXMgdGhpcyBvbmUuCgpgYGB7cn0KeSA8LSBpZiAoeCA+IDMpIHsKICAxMAp9IGVsc2V7CiAgMAp9CmBgYAoKT2YgY291cnNlLCB0aGUgZWxzZSBjbGF1c2UgaXMgbm90IG5lY2Vzc2FyeS4KCmBgYAppZig8Y29uZGl0aW9uMT4pIHsgCgp9CgppZig8Y29uZGl0aW9uMj4pIHsKCn0KYGBgCgojIyBDb250cm9sIFN0cnVjdHVyZXMgLSBGb3IgbG9vcHMKCmZvciBsb29wcyB0YWtlIGFuIGludGVyYXRvciB2YXJpYWJsZSBhbmQgYXNzaWduIGl0IHN1Y2Nlc3NpdmUgdmFsdWVzIGZyb20gYSBzZXF1ZW5jZSBvciB2ZWN0b3IuIEZvciBsb29wcyBhcmUgbW9zdCBjb21tb25seSB1c2VkIGZvciBpdGVyYXRpbmcgb3ZlciB0aGUgZWxlbWVudHMgb2YgYW4gb2JqZWN0IChsaXN0LCB2ZWN0b3IsIGV0Yy4pCgpgYGB7cn0KZm9yKGkgaW4gMToxMCkgewogIHByaW50KGkpCn0KYGBgCgpUaGlzIGxvb3AgdGFrZXMgdGhlIGkgdmFyaWFibGUgYW5kIGluIGVhY2ggaXRlcmF0aW9uIG9mIHRoZSBsb29wIGdpdmVzIGl0IHZhbHVlcyAxLCAyLCAzLCAuLi4sIDEwLCBhbmQgdGhlbiBleGl0cy4KClRoZXNlIHRocmVlIGxvb3BzIGhhdmUgdGhlIHNhbWUgYmVoYXZpb3IuCgpgYGB7cn0KeCA8LSBjKCJhIiwgImIiLCAiYyIsICJkIikKCmZvciAoaSBpbiAxOjQpIHsKICBwcmludCh4W2ldKQp9CmBgYAoKCmBgYHtyfQpmb3IoaSBpbiBzZXFfYWxvbmcoeCkpIHsKICBwcmludCh4W2ldKQp9CmBgYAoKYGBge3J9CmZvcihsZXR0ZXIgaW4geCkgewogIHByaW50KGxldHRlcikKfQpgYGAKCmBgYHtyfQpmb3IoaSBpbiAxOjQpIHByaW50KHhbaV0pCmBgYAoKIyMjIE5lc3RlZCBmb3IgbG9vcHMKCmZvciBsb29wcyBjYW4gYmUgbmVzdGVkLgoKYGBge3J9CnggPC0gbWF0cml4KDE6NiwgMiwgMykKZm9yIChpIGluIHNlcV9sZW4obnJvdyh4KSkpIHsKICBmb3IgKGogaW4gc2VxX2xlbihuY29sKHgpKSkgewogICAgcHJpbnQoeFtpLCBqXSkKICB9Cn0KYGBgCgpCZSBjYXJlZnVsIHdpdGggbmVzdGluZyB0aG91Z2guIE5lc3RpbmcgYmV5b25kIDLigJMzIGxldmVscyBpcyBvZnRlbiB2ZXJ5IGRpZmZpY3VsdCB0byByZWFkL3VuZGVyc3RhbmQu</div>
 
 
 
