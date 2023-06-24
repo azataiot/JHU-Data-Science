@@ -1752,77 +1752,132 @@ display: none;
 
 
 <!-- rnb-text-begin -->
-<div id="subsetting---basics" class="section level1">
-<h1>Subsetting - Basics</h1>
-<div id="subsetting" class="section level2">
-<h2>Subsetting</h2>
-<p>There are a number of operators that can be used to extract subsets
-of R objects. · <em>[ always returns an object of the same class as the
-original</em>; can be used to select more than one element (there is one
-exception) · <em>[[ is used to extract elements of a list or a data
-frame</em>; it can only be used to extract a single element and the
-class of the returned object will not necessarily be a list or data
-frame · <em>$ is used to extract elements of a list or data frame by
-name</em>; semantics are similar to that of [[.</p>
+<div id="subsetting---matrices" class="section level1">
+<h1>Subsetting - Matrices</h1>
+<p>Matrices can be subsetted in the usual way with (i,j) type
+indices.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBjKFwiYVwiLCBcImJcIiwgXCJjXCIsIFwiY1wiLCBcImRcIiwgXCJhXCIpXG54WzFdXG5gYGAifQ== -->
-<pre class="r"><code>x &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;c&quot;, &quot;d&quot;, &quot;a&quot;)
-x[1]</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBtYXRyaXgoMTo2LCAyLCAzKVxueFxuYGBgIn0= -->
+<pre class="r"><code>x &lt;- matrix(1:6, 2, 3)
+x</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYVwiXG4ifQ== -->
-<pre><code>[1] &quot;a&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsyXVxuYGBgIn0= -->
-<pre class="r"><code>x[2]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYlwiXG4ifQ== -->
-<pre><code>[1] &quot;b&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsxOjRdXG5gYGAifQ== -->
-<pre class="r"><code>x[1:4]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYVwiIFwiYlwiIFwiY1wiIFwiY1wiXG4ifQ== -->
-<pre><code>[1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;c&quot;</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFt4PlwiYVwiXVxuYGBgIn0= -->
-<pre class="r"><code>x[x&gt;&quot;a&quot;]</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYlwiIFwiY1wiIFwiY1wiIFwiZFwiXG4ifQ== -->
-<pre><code>[1] &quot;b&quot; &quot;c&quot; &quot;c&quot; &quot;d&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdIFssMl0gWywzXVxuWzEsXSAgICAxICAgIDMgICAgNVxuWzIsXSAgICAyICAgIDQgICAgNlxuIn0= -->
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudTwteD5cImFcIlxudVxuYGBgIn0= -->
-<pre class="r"><code>u&lt;-x&gt;&quot;a&quot;
-u</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIHhbMSwgMl1cbmBgYCJ9 -->
+<pre class="r"><code> x[1, 2]</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIEZBTFNFICBUUlVFICBUUlVFICBUUlVFICBUUlVFIEZBTFNFXG4ifQ== -->
-<pre><code>[1] FALSE  TRUE  TRUE  TRUE  TRUE FALSE</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDNcbiJ9 -->
+<pre><code>[1] 3</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFt1XVxuYGBgIn0= -->
-<pre class="r"><code>x[u]</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsyLCAxXSAjIHNlY29uZCByb3cgZmlyc3QgZWxlbWVudFxuYGBgIn0= -->
+<pre class="r"><code>x[2, 1] # second row first element</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiYlwiIFwiY1wiIFwiY1wiIFwiZFwiXG4ifQ== -->
-<pre><code>[1] &quot;b&quot; &quot;c&quot; &quot;c&quot; &quot;d&quot;</code></pre>
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDJcbiJ9 -->
+<pre><code>[1] 2</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Indices can also be missing.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsxLF0gIyBhbGwgZWxlbWVudHMgZnJvbSB0aGUgZmlyc3Qgcm93XG5gYGAifQ== -->
+<pre class="r"><code>x[1,] # all elements from the first row</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEgMyA1XG4ifQ== -->
+<pre><code>[1] 1 3 5</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFssMl0gIyBhbGwgZWxlbWVudHMgZnJvbSB0aGUgc2Vjb25kIGNvbHVtblxuYGBgIn0= -->
+<pre class="r"><code>x[,2] # all elements from the second column</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDMgNFxuIn0= -->
+<pre><code>[1] 3 4</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>By default, when a single element of a matrix is retrieved, it is
+returned as a vector of length 1 rather than a 1 × 1 matrix. This
+behavior can be turned off by setting drop = FALSE.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBtYXRyaXgoMTo2LCAyLCAzKVxueFxuYGBgIn0= -->
+<pre class="r"><code>x &lt;- matrix(1:6, 2, 3)
+x</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdIFssMl0gWywzXVxuWzEsXSAgICAxICAgIDMgICAgNVxuWzIsXSAgICAyICAgIDQgICAgNlxuIn0= -->
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-</div>
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsxLCAyXVxuYGBgIn0= -->
+<pre class="r"><code>x[1, 2]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDNcbiJ9 -->
+<pre><code>[1] 3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsxLCAyLCBkcm9wPUZBTFNFXVxuYGBgIn0= -->
+<pre class="r"><code>x[1, 2, drop=FALSE]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdXG5bMSxdICAgIDNcbiJ9 -->
+<pre><code>     [,1]
+[1,]    3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Similarly, subsetting a single column or a single row will give you a
+vector, not a matrix (by default).</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueCA8LSBtYXRyaXgoMTo2LCAyLCAzKVxueFxuYGBgIn0= -->
+<pre class="r"><code>x &lt;- matrix(1:6, 2, 3)
+x</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBbLDFdIFssMl0gWywzXVxuWzEsXSAgICAxICAgIDMgICAgNVxuWzIsXSAgICAyICAgIDQgICAgNlxuIn0= -->
+<pre><code>     [,1] [,2] [,3]
+[1,]    1    3    5
+[2,]    2    4    6</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsxLF1cbmBgYCJ9 -->
+<pre class="r"><code>x[1,]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDEgMyA1XG4ifQ== -->
+<pre><code>[1] 1 3 5</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueFsxLCBkcm9wPUZdXG5gYGAifQ== -->
+<pre class="r"><code>x[1, drop=F]</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDFcbiJ9 -->
+<pre><code>[1] 1</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBTdWJzZXR0aW5nIC0gQmFzaWNzCgojIyBTdWJzZXR0aW5nCgoKClRoZXJlIGFyZSBhIG51bWJlciBvZiBvcGVyYXRvcnMgdGhhdCBjYW4gYmUgdXNlZCB0byBleHRyYWN0IHN1YnNldHMgb2YgUiBvYmplY3RzLgrCtyAqWyBhbHdheXMgcmV0dXJucyBhbiBvYmplY3Qgb2YgdGhlIHNhbWUgY2xhc3MgYXMgdGhlIG9yaWdpbmFsKjsgY2FuIGJlIHVzZWQgdG8gc2VsZWN0IG1vcmUgdGhhbiBvbmUgZWxlbWVudCAodGhlcmUgaXMgb25lIGV4Y2VwdGlvbikKwrcgKltbIGlzIHVzZWQgdG8gZXh0cmFjdCBlbGVtZW50cyBvZiBhIGxpc3Qgb3IgYSBkYXRhIGZyYW1lKjsgaXQgY2FuIG9ubHkgYmUgdXNlZCB0byBleHRyYWN0IGEgc2luZ2xlIGVsZW1lbnQgYW5kIHRoZSBjbGFzcyBvZiB0aGUgcmV0dXJuZWQgb2JqZWN0IHdpbGwgbm90IG5lY2Vzc2FyaWx5IGJlIGEgbGlzdCBvciBkYXRhIGZyYW1lCsK3ICokIGlzIHVzZWQgdG8gZXh0cmFjdCBlbGVtZW50cyBvZiBhIGxpc3Qgb3IgZGF0YSBmcmFtZSBieSBuYW1lKjsgc2VtYW50aWNzIGFyZSBzaW1pbGFyIHRvIHRoYXQgb2YgW1suCgpgYGB7cn0KeCA8LSBjKCJhIiwgImIiLCAiYyIsICJjIiwgImQiLCAiYSIpCnhbMV0KYGBgCmBgYHtyfQp4WzJdCmBgYApgYGB7cn0KeFsxOjRdCmBgYApgYGB7cn0KeFt4PiJhIl0KYGBgCgpgYGB7cn0KdTwteD4iYSIKdQpgYGAKYGBge3J9CnhbdV0KYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyBTdWJzZXR0aW5nIC0gTWF0cmljZXMKCk1hdHJpY2VzIGNhbiBiZSBzdWJzZXR0ZWQgaW4gdGhlIHVzdWFsIHdheSB3aXRoIChpLGopIHR5cGUgaW5kaWNlcy4KCmBgYHtyfQp4IDwtIG1hdHJpeCgxOjYsIDIsIDMpCngKYGBgCgpgYGB7cn0KeFsxLCAyXSAjIGZpcnN0IHJvdyBzZWNvbmQgZWxlbWVudApgYGAKYGBge3J9CnhbMiwgMV0gIyBzZWNvbmQgcm93IGZpcnN0IGVsZW1lbnQKYGBgCgpJbmRpY2VzIGNhbiBhbHNvIGJlIG1pc3NpbmcuCgpgYGB7cn0KeFsxLF0gIyBhbGwgZWxlbWVudHMgZnJvbSB0aGUgZmlyc3Qgcm93CmBgYApgYGB7cn0KeFssMl0gIyBhbGwgZWxlbWVudHMgZnJvbSB0aGUgc2Vjb25kIGNvbHVtbgpgYGAKCkJ5IGRlZmF1bHQsIHdoZW4gYSBzaW5nbGUgZWxlbWVudCBvZiBhIG1hdHJpeCBpcyByZXRyaWV2ZWQsIGl0IGlzIHJldHVybmVkIGFzIGEgdmVjdG9yIG9mIGxlbmd0aCAxIHJhdGhlciB0aGFuIGEgMSDDlyAxIG1hdHJpeC4gVGhpcyBiZWhhdmlvciBjYW4gYmUgdHVybmVkIG9mZiBieSBzZXR0aW5nIGRyb3AgPSBGQUxTRS4KCmBgYHtyfQp4IDwtIG1hdHJpeCgxOjYsIDIsIDMpCngKYGBgCgoKYGBge3J9CnhbMSwgMl0KYGBgCgpgYGB7cn0KeFsxLCAyLCBkcm9wPUZBTFNFXQpgYGAKClNpbWlsYXJseSwgc3Vic2V0dGluZyBhIHNpbmdsZSBjb2x1bW4gb3IgYSBzaW5nbGUgcm93IHdpbGwgZ2l2ZSB5b3UgYSB2ZWN0b3IsIG5vdCBhIG1hdHJpeCAoYnkgZGVmYXVsdCkuCgpgYGB7cn0KeCA8LSBtYXRyaXgoMTo2LCAyLCAzKQp4CmBgYApgYGB7cn0KeFsxLF0KYGBgCmBgYHtyfQp4WzEsIGRyb3A9Rl0KYGBgCgo=</div>
 
 
 
@@ -1869,7 +1924,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("1.17-Subsetting - Basics.Rmd");
+  window.initializeSourceEmbed("1.19-Subsetting - Matrices.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
