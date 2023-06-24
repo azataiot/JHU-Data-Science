@@ -1,0 +1,52 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Vectorized Operations
+
+Many operations in R are vectorized making code more efficient, concise, and easier to read.
+
+```{r}
+x<-1:4;y<-6:9
+x
+y
+```
+```{r}
+x+y
+```
+
+```{r}
+x>2
+```
+
+```{r}
+y ==8 
+```
+```{r}
+x*y
+```
+```{r}
+x/y
+```
+
+## Vectorized Matrix Operations
+
+```{r}
+x <- matrix(1:4, 2, 2); y <- matrix(rep(10, 4), 2, 2)
+x
+```
+
+```{r}
+y
+```
+```{r}
+x * y ## element-wise multiplication
+```
+```{r}
+x/y
+```
+```{r}
+x %*% y ## true matrix multiplication
+```
+
