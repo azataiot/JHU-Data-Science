@@ -1,0 +1,74 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Control Structures 
+
+
+
+## Control Structures - Introduction
+
+Control structures in R allow you to control the flow of execution of the program, depending on runtime conditions. Common structures are
+· if, else: testing a condition
+· for: execute a loop a fixed number of times
+· while: execute a loop while a condition is true · repeat: execute an infinite loop
+· break: break the execution of a loop
+· next: skip an interation of a loop
+· return: exit a function
+Most control structures are not used in interactive sessions, but rather when writing functions or longer expresisons.
+
+## Control Structures - If-else
+
+```
+if(<condition>) {
+## do something
+}else{
+## do something else
+} if(<condition1>) {
+## do something
+} else if(<condition2>) {
+## do something different
+}else{
+## do something different
+}
+```
+### if
+
+This is a valid if/else structure.
+```{r}
+x <-0
+```
+
+
+```{r}
+if(x>3) {
+  y <- 10
+} else{
+  y <- 0
+}
+```
+
+So is this one.
+
+```{r}
+y <- if (x > 3) {
+  10
+} else{
+  0
+}
+```
+
+Of course, the else clause is not necessary.
+
+```
+if(<condition1>) { 
+
+}
+
+if(<condition2>) {
+
+}
+```
+
+
