@@ -1,0 +1,26 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Subsetting - Partial Matching
+
+
+Partial matching of names is allowed with [[ and $.
+
+```{r}
+x <- list(aardvark = 1:5)
+x
+```
+```{r}
+x$a
+```
+
+```{r}
+x[["a"]]
+```
+
+```{r}
+x[["a", exact = FALSE]]
+```
+
