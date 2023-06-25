@@ -1,6 +1,8 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "4. Scoping Rules"
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 
 # 4. Scoping Rules

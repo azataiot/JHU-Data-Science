@@ -1,0 +1,580 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={4. Scoping Rules},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{4. Scoping Rules}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{scoping-rules}{%
+\section{4. Scoping Rules}\label{scoping-rules}}
+
+\hypertarget{scoping-rules---symbol-binding}{%
+\subsection{Scoping Rules - Symbol
+Binding}\label{scoping-rules---symbol-binding}}
+
+\hypertarget{a-diversion-on-binding-values-to-symbol}{%
+\subsubsection{A Diversion on Binding Values to
+Symbol}\label{a-diversion-on-binding-values-to-symbol}}
+
+How does R know which value to assign to which symbol? When I type
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{lm }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x }\SpecialCharTok{*}\NormalTok{ x}
+\NormalTok{\}}
+
+\NormalTok{lm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function(x) {
+##   x * x
+## }
+\end{verbatim}
+
+how does R know what value to assign to the symbol lm? Why doesn't it
+give it the value of lm that is in the stats package?
+
+When R tries to bind a value to a symbol, it searches through a series
+of environments to find the appropriate value. When you are working on
+the command line and need to retrieve the value of an R object, the
+order is roughly 1. Search the global environment for a symbol name
+matching the one requested.\\
+2. Search the namespaces of each of the packages on the search list The
+search list can be found by using the search function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{search}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] ".GlobalEnv"        "package:stats"     "package:graphics" 
+## [4] "package:grDevices" "package:utils"     "package:datasets" 
+## [7] "package:methods"   "Autoloads"         "package:base"
+\end{verbatim}
+
+\hypertarget{binding-values-to-symbol}{%
+\subsubsection{Binding Values to
+Symbol}\label{binding-values-to-symbol}}
+
+· The global environment or the user's workspace is always the first
+element of the search list and the base package is always the last. ·
+The order of the packages on the search list matters! · User's can
+configure which packages get loaded on startup so you cannot assume that
+there will be a set list of packages available. · When a user loads a
+package with library the namespace of that package gets put in position
+2 of the search list (by default) and everything else gets shifted down
+the list. · Note that R has separate namespaces for functions and
+non-functions so it's possible to have an object named c and a function
+named c.
+
+\hypertarget{scoping-rules-1}{%
+\subsubsection{Scoping Rules}\label{scoping-rules-1}}
+
+The scoping rules for R are the main feature that make it different from
+the original S language. · The scoping rules determine how a value is
+associated with a free variable in a function · R uses lexical scoping
+or static scoping. A common alternative is dynamic scoping. · Related to
+the scoping rules is how R uses the search list to bind a value to a
+symbol · Lexical scoping turns out to be particularly useful for
+simplifying statistical computations
+
+\hypertarget{lexical-scoping}{%
+\subsubsection{Lexical Scoping}\label{lexical-scoping}}
+
+Consider the following function.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{f }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x, y) \{}
+\NormalTok{  x }\SpecialCharTok{\^{}} \DecValTok{2} \SpecialCharTok{+}\NormalTok{ y }\SpecialCharTok{/}\NormalTok{ z}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+This function has 2 formal arguments x and y. In the body of the
+function there is another symbol z. In this case z is called a free
+variable. The scoping rules of a language determine how values are
+assigned to free variables. Free variables are not formal arguments and
+are not local variables (assigned insided the function body).
+
+Lexical scoping in R means that the values of free variables are
+searched for in the environment in which the function was defined. What
+is an environment? · An environment is a collection of (symbol, value)
+pairs, i.e.~x is a symbol and 3.14 might be its value. · Every
+environment has a parent environment; it is possible for an environment
+to have multiple ``children'' · the only environment without a parent is
+the empty environment · A function + an environment = a closure or
+function closure.
+
+Searching for the value for a free variable: · If the value of a symbol
+is not found in the environment in which a function was defined, then
+the search is continued in the parent environment. · The search
+continues down the sequence of parent environments until we hit the
+top-level environment; this usually the global environment (workspace)
+or the namespace of a package. · After the top-level environment, the
+search continues down the search list until we hit the empty
+environment. If a value for a given symbol cannot be found once the
+empty environment is arrived at, then an error is thrown.
+
+\hypertarget{scoping-rules---r-scoping-rules}{%
+\subsection{Scoping Rules - R Scoping
+Rules}\label{scoping-rules---r-scoping-rules}}
+
+\hypertarget{lexical-scoping-1}{%
+\subsubsection{Lexical Scoping}\label{lexical-scoping-1}}
+
+Why does all this matter? · Typically, a function is defined in the
+global environment, so that the values of free variables are just found
+in the user's workspace · This behavior is logical for most people and
+is usually the ``right thing'' to do · However, in R you can have
+functions defined inside other functions -
+LanguageslikeCdon'tletyoudothis · Now things get interesting --- In this
+case the environment in which a function is defined is the body of
+another function!
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make.power }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(n) \{}
+\NormalTok{  pow }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{    x }\SpecialCharTok{\^{}}\NormalTok{ n}
+\NormalTok{  \}}
+\NormalTok{  pow}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+This function returns another function as its value.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cube }\OtherTok{\textless{}{-}} \FunctionTok{make.power}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\NormalTok{square }\OtherTok{\textless{}{-}} \FunctionTok{make.power}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cube}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 27
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{square}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4
+\end{verbatim}
+
+\hypertarget{exploring-a-function-closure}{%
+\subsubsection{Exploring a Function
+Closure}\label{exploring-a-function-closure}}
+
+What's in a function's environment?
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{(}\FunctionTok{environment}\NormalTok{(cube))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "n"   "pow"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get}\NormalTok{(}\StringTok{"n"}\NormalTok{, }\FunctionTok{environment}\NormalTok{(cube))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{(}\FunctionTok{environment}\NormalTok{(square))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "n"   "pow"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{get}\NormalTok{(}\StringTok{"n"}\NormalTok{, }\FunctionTok{environment}\NormalTok{(square))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2
+\end{verbatim}
+
+\hypertarget{lexical-vs.-dynamic-scoping}{%
+\subsubsection{Lexical vs.~Dynamic
+Scoping}\label{lexical-vs.-dynamic-scoping}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y }\OtherTok{\textless{}{-}} \DecValTok{10}
+\NormalTok{f }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  y }\OtherTok{\textless{}{-}} \DecValTok{2}
+\NormalTok{  y }\SpecialCharTok{\^{}} \DecValTok{2} \SpecialCharTok{+} \FunctionTok{g}\NormalTok{(x)}
+\NormalTok{\}}
+\NormalTok{g }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  x }\SpecialCharTok{*}\NormalTok{ y}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 10
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{f}\NormalTok{(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 34
+\end{verbatim}
+
+· With lexical scoping the value of y in the function g is looked up in
+the environment in which the function was defined, in this case the
+global environment, so the value of y is 10. · With dynamic scoping, the
+value of y is looked up in the environment from which the function was
+called (sometimes referred to as the calling environment). -
+InRthecallingenvironmentisknownastheparentframe · So the value ofywould
+be 2.
+
+When a function is defined in the global environment and is subsequently
+called from the global environment, then the defining environment and
+the calling environment are the same. This can sometimes give the
+appearance of dynamic scoping.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{}
+\NormalTok{  a }\OtherTok{\textless{}{-}} \DecValTok{3}
+\NormalTok{  x }\SpecialCharTok{+}\NormalTok{ a }\SpecialCharTok{+}\NormalTok{ y}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{g}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 15
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{y}\OtherTok{\textless{}{-}}\DecValTok{3}
+\FunctionTok{g}\NormalTok{(}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 8
+\end{verbatim}
+
+\hypertarget{other-languages}{%
+\subsubsection{Other Languages}\label{other-languages}}
+
+Other languages that support lexical scoping · Scheme · Perl · Python ·
+Common Lisp (all languages converge to Lisp)
+
+\hypertarget{consequences-of-lexical-scoping}{%
+\subsubsection{Consequences of Lexical
+Scoping}\label{consequences-of-lexical-scoping}}
+
+In R, all objects must be stored in memory · All functions must carry a
+pointer to their respective defining environments, which could be
+anywhere · In S-PLUS, free variables are always looked up in the global
+workspace, so everything can be stored on the disk because the
+``defining environment'' of all functions is the same.
+
+\hypertarget{scoping-rules---optimization-example-optional}{%
+\subsection{Scoping Rules - Optimization Example
+(OPTIONAL)}\label{scoping-rules---optimization-example-optional}}
+
+\hypertarget{application-optimization}{%
+\subsubsection{Application:
+Optimization}\label{application-optimization}}
+
+Why is any of this information useful? · Optimization routines in R like
+optim, nlm, and optimize require you to pass a function whose argument
+is a vector of parameters (e.g.~a log-likelihood) · However, an object
+function might depend on a host of other things besides its parameters
+(like data) · When writing software which does optimization, it may be
+desirable to allow the user to hold certain parameters fixed
+
+\hypertarget{maximizing-a-normal-likelihood}{%
+\subsubsection{Maximizing a Normal
+Likelihood}\label{maximizing-a-normal-likelihood}}
+
+Write a ``constructor'' function
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{make.NegLogLik }\OtherTok{\textless{}{-}}
+  \ControlFlowTok{function}\NormalTok{(data, }\AttributeTok{fixed =} \FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)) \{}
+\NormalTok{    params }\OtherTok{\textless{}{-}}\NormalTok{ fixed}
+    \ControlFlowTok{function}\NormalTok{(p) \{}
+\NormalTok{      params[}\SpecialCharTok{!}\NormalTok{fixed] }\OtherTok{\textless{}{-}}\NormalTok{ p}
+\NormalTok{      mu }\OtherTok{\textless{}{-}}\NormalTok{ params[}\DecValTok{1}\NormalTok{]}
+\NormalTok{      sigma }\OtherTok{\textless{}{-}}\NormalTok{ params[}\DecValTok{2}\NormalTok{]}
+\NormalTok{      a }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FloatTok{0.5} \SpecialCharTok{*} \FunctionTok{length}\NormalTok{(data) }\SpecialCharTok{*} \FunctionTok{log}\NormalTok{(}\DecValTok{2} \SpecialCharTok{*}\NormalTok{ pi }\SpecialCharTok{*}\NormalTok{ sigma }\SpecialCharTok{\^{}} \DecValTok{2}\NormalTok{) }
+\NormalTok{      b }\OtherTok{\textless{}{-}} \SpecialCharTok{{-}}\FloatTok{0.5} \SpecialCharTok{*} \FunctionTok{sum}\NormalTok{((data }\SpecialCharTok{{-}}\NormalTok{ mu) }\SpecialCharTok{\^{}} \DecValTok{2}\NormalTok{) }\SpecialCharTok{/}\NormalTok{ (sigma }\SpecialCharTok{\^{}} \DecValTok{2}\NormalTok{) }
+      \SpecialCharTok{{-}}\NormalTok{ (a }\SpecialCharTok{+}\NormalTok{ b)}
+\NormalTok{    \}}
+\NormalTok{  \}}
+\end{Highlighting}
+\end{Shaded}
+
+Note: Optimization functions in R minimize functions, so you need to use
+the negative log-likelihood.
+
+\hypertarget{maximizing-a-normal-likelihood-1}{%
+\subsubsection{Maximizing a Normal
+Likelihood}\label{maximizing-a-normal-likelihood-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{); normals }\OtherTok{\textless{}{-}} \FunctionTok{rnorm}\NormalTok{(}\DecValTok{100}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{)}
+\NormalTok{nLL }\OtherTok{\textless{}{-}} \FunctionTok{make.NegLogLik}\NormalTok{(normals)}
+\NormalTok{nLL}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## function(p) {
+##       params[!fixed] <- p
+##       mu <- params[1]
+##       sigma <- params[2]
+##       a <- -0.5 * length(data) * log(2 * pi * sigma ^ 2) 
+##       b <- -0.5 * sum((data - mu) ^ 2) / (sigma ^ 2) 
+##       - (a + b)
+##     }
+## <bytecode: 0x1484ea790>
+## <environment: 0x12e075aa8>
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ls}\NormalTok{(}\FunctionTok{environment}\NormalTok{(nLL))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "data"   "fixed"  "params"
+\end{verbatim}
+
+\hypertarget{estimating-parameters}{%
+\subsubsection{Estimating Parameters}\label{estimating-parameters}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{optim}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\AttributeTok{mu =} \DecValTok{0}\NormalTok{, }\AttributeTok{sigma =} \DecValTok{1}\NormalTok{), nLL)}\SpecialCharTok{$}\NormalTok{par}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       mu    sigma 
+## 1.218239 1.787343
+\end{verbatim}
+
+Fixing σ = 2
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nLL }\OtherTok{\textless{}{-}} \FunctionTok{make.NegLogLik}\NormalTok{(normals, }\FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\FunctionTok{optimize}\NormalTok{(nLL, }\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{))}\SpecialCharTok{$}\NormalTok{minimum}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.217775
+\end{verbatim}
+
+Fixing μ = 1
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nLL }\OtherTok{\textless{}{-}} \FunctionTok{make.NegLogLik}\NormalTok{(normals, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{))}
+\FunctionTok{optimize}\NormalTok{(nLL, }\FunctionTok{c}\NormalTok{(}\FloatTok{1e{-}6}\NormalTok{, }\DecValTok{10}\NormalTok{))}\SpecialCharTok{$}\NormalTok{minimum}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1.800596
+\end{verbatim}
+
+\hypertarget{plotting-the-likelihood}{%
+\subsubsection{Plotting the Likelihood}\label{plotting-the-likelihood}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nLL }\OtherTok{\textless{}{-}} \FunctionTok{make.NegLogLik}\NormalTok{(normals, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\ConstantTok{FALSE}\NormalTok{)) }
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FloatTok{1.7}\NormalTok{, }\FloatTok{1.9}\NormalTok{, }\AttributeTok{len =} \DecValTok{100}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(x, nLL)}
+\FunctionTok{plot}\NormalTok{(x, }\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(y }\SpecialCharTok{{-}} \FunctionTok{min}\NormalTok{(y))), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{4.-Scoping-Rules_files/figure-latex/unnamed-chunk-24-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{nLL }\OtherTok{\textless{}{-}} \FunctionTok{make.NegLogLik}\NormalTok{(normals, }\FunctionTok{c}\NormalTok{(}\ConstantTok{FALSE}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\NormalTok{x }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\FloatTok{1.5}\NormalTok{, }\AttributeTok{len =} \DecValTok{100}\NormalTok{)}
+\NormalTok{y }\OtherTok{\textless{}{-}} \FunctionTok{sapply}\NormalTok{(x, nLL)}
+\FunctionTok{plot}\NormalTok{(x, }\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{(y }\SpecialCharTok{{-}} \FunctionTok{min}\NormalTok{(y))), }\AttributeTok{type =} \StringTok{"l"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{4.-Scoping-Rules_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\hypertarget{lexical-scoping-summary}{%
+\subsubsection{Lexical Scoping Summary}\label{lexical-scoping-summary}}
+
+· Objective functions can be ``built'' which contain all of the
+necessary data for evaluating the function · No need to carry around
+long argument lists --- useful for interactive and exploratory work. ·
+Code can be simplified and cleand up · Reference: Robert Gentleman and
+Ross Ihaka (2000). ``Lexical Scope and Statistical Computing,'' JCGS, 9,
+491--508.
+
+\end{document}
