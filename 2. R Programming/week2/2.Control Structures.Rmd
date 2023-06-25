@@ -1,9 +1,24 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "2. Control Structures "
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
 ---
 
-# Control Structures 
+# 2. Control Structures 
 
 
 
@@ -162,7 +177,7 @@ Conditions are always evaluated from left to right.
 
 Repeat initiates an infinite loop; these are not commonly used in statistical applications but they do have their uses. The only way to exit a repeat loop is to call break.
 
-```{r}
+```{r, error=TRUE}
 x0 <- 1 
 tol <- 1e-8
 repeat {

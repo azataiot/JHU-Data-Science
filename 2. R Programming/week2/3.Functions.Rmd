@@ -1,6 +1,21 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "3. R Functions"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
 ---
 
 # R Functions
@@ -106,7 +121,7 @@ args(lm)
 
 The following two calls are equivalent.
 
-```{r}
+```{r,error=TRUE}
 lm(data = mydata, y ~ x, model = FALSE, 1:100)
 lm(y ~ x, mydata, 1:100, model = FALSE)
 ```
@@ -147,7 +162,7 @@ f(2)
 This function never actually uses the argument b, so calling f(2) will not produce an error because the 2 gets positionally matched to a.
 
 
-```{r}
+```{r,error=TRUE}
 f <- function(a, b) {
   print(a)
   print(b)
