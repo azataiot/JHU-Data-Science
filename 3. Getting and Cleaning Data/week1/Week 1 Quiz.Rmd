@@ -1,0 +1,87 @@
+---
+title: "Week 1 Quiz"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+# Week 1 Quiz
+
+```{r}
+str(download.file)
+```
+
+```{r}
+csvUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06hid.csv"
+pdfUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FPUMSDataDict06.pdf"
+download.file(csvUrl, destfile = "./data/UScommunities.csv", method = "curl")
+download.file(pdfUrl, destfile = "./data/UScommunities.pdf", method = "curl")
+list.files("./data")
+```
+
+```{r}
+uscom <- read.csv("data/UScommunities.csv")
+head(uscom)
+```
+```{r}
+str(uscom)
+```
+
+```{r,error=TRUE}
+# Print count for VAL=24
+val_24_count <- val_counts[as.character(24)]
+print(val_24_count)
+```
+
+```{r}
+dat <- read.csv("data/gas.csv",sep = ";")
+dat
+```
+
+```{r}
+sum(dat$Zip*dat$Ext,na.rm=T)
+```
+
+```{r,error=TRUE}
+library(XML)
+library(RCurl)
+xmlURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml"
+xmlData <- getURL(xmlURL)
+doc <- xmlTreeParse(xmlData, useInternal = TRUE)
+```
+```{r}
+# load required packages
+library(rvest)
+library(xml2)
+
+# fetch the XML data
+xml_data <- read_xml("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Frestaurants.xml")
+
+# get all the zipcodes
+zipcodes <- xml_data %>% xml_find_all("//zipcode") %>% xml_text()
+
+# count the number of restaurants with zipcode 21231
+sum(zipcodes == "21231")
+```
+
+```{r,error=TRUE}
+DT  <- fread("data/getdata_data_ss06pid.csv")
+```
+
+```{r,error=TRUE}
+head(DT)
+```
+
