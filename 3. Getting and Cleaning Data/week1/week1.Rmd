@@ -243,12 +243,123 @@ cameraDataSubset <-
 - XLConnect vignette is a good place to start for that pakkcgae
 - In general it is advised to store your data in eigher a database or in a comma seperated files (.csv) or tab separated files (.tab/.txt) as they are easier to distribute.
 
+## Reading XML
+
+### XML
+
+Extensible markup language
+Frequently used to store structured data
+Particularly widely used in internet applications
+Extracting XML is the basis for most web scraping
+Components
+- Markup - labels that give the text structure
+- Content - the actual text of the document
+
+### Tags, elements and attributes
+
+Tags correspond to general labels
+- Start tags
+- End tags
+- Empty tags
+
+Elements are specific examples of tags
+
+- <Greeting> Hello, World </Greeting> 
+
+Attributes are components of the label 
+
+- <img src="jeff.jpg" alt="instructor"/>
+- <step number="3"> Connect A to B. </step>
+
+### Example XML file
+
+```{r,error=TRUE}
+library(XML)
+xmlURL <- "https://www.w3schools.com/xml/simple.xml"
+doc <- xmlTreeParse(xmlURL, useInternal = TRUE)
+```
+```{r}
+xmlURL <- "https://www.w3schools.com/xml/simple.xml"
+download.file(xmlURL, destfile = "./data/simple.xml", method = "curl")
+list.files("./data")
+```
 
 
+```{r,error=TRUE}
+library(XML)
+# Parse the XML file
+doc <- xmlTreeParse("data/simple.xml", useInternal = TRUE)
+doc
+```
 
 
+```{r}
+rootNode <- xmlRoot(doc)
+rootNode
+```
+
+```{r}
+xmlName(rootNode)
+```
+```{r}
+names(rootNode)
+```
+
+### DIrectly access parts of the XML document 
+
+```{r}
+rootNode[[1]]
+```
 
 
+```{r}
+rootNode[[1]][[1]]
+```
+
+### Programaticallye xtractp artso f the file
 
 
+```{r}
+xmlSApply(rootNode,xmlValue)
+```
+
+### XPath
+
+- /node Top level node
+- //node Node at any level
+- node[@attr-name] Node with an atribute name
+- node[@attr-name='bob'] Node with attribute name attr-name='bob 
+
+### Get the items on the menu and prices
+
+```{r}
+xpathSApply(rootNode, "//name",xmlValue)
+```
+
+
+```{r}
+xpathSApply(rootNode, "//price",xmlValue)
+```
+
+### Another example 
+
+```{r echo=FALSE, out.width = "50%", fig.align = "center"}
+knitr::include_graphics("assets/2.png")
+```
+### Viewing the source
+
+```{r echo=FALSE, out.width = "50%", fig.align = "center"}
+knitr::include_graphics("assets/3.png")
+```
+
+### Extract content by attributes
+
+```{r}
+library(RCurl)
+webURL <- "https://www.espn.com/nfl/team/_/name/bal/baltimore-ravens"
+webData <- getURL(webURL)
+doc <- htmlTreeParse(webData, useInternal=TRUE)
+scores <- xpathSApply(doc,"/html/body/div[1]/div/div/div/main/div[2]/div[5]/div/div/section/div/div[9]/div[1]",xmlValue)
+scores
+```
 
