@@ -1,0 +1,102 @@
+---
+title: "Week 3 Quiz"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+# Week 3 Quiz
+
+
+```{r}
+library(datasets)
+data(iris)
+```
+
+```{r}
+?iris
+```
+
+```{r}
+head(iris)
+```
+
+```{r}
+mask <- iris$Species == "virginica"
+mask
+```
+
+```{r}
+round(mean(subset(iris, Species == "virginica")$Sepal.Length))
+```
+
+```{r, error=TRUE}
+colMeans(iris)
+```
+```{r}
+apply(iris[,1:4], 2, mean)
+```
+
+```{r}
+library(datasets)
+data(mtcars)
+```
+
+```{r}
+?mtcars
+```
+
+```{r}
+head(mtcars)
+```
+
+```{r}
+str(mtcars)
+```
+
+```{r}
+split(mtcars,mtcars$cyl)
+```
+
+```{r}
+tapply(mtcars$mpg, mtcars$cyl, mean)
+```
+
+```{r}
+with(mtcars,tapply(mpg,cyl,mean))
+```
+
+```{r}
+sapply(split(mtcars$mpg, mtcars$cyl), mean)
+```
+
+```{r}
+avg_hp_4cyl <- mean(subset(mtcars, cyl == 4)$hp)
+avg_hp_8cyl <- mean(subset(mtcars, cyl == 8)$hp)
+```
+
+```{r}
+abs_diff <- abs(avg_hp_4cyl - avg_hp_8cyl)
+```
+
+```{r}
+round(abs_diff)
+```
+
+```{r}
+# debug(ls)
+```
+
