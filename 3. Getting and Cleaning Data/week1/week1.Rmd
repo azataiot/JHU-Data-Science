@@ -127,7 +127,9 @@ Be aware of relative versus absolute paths
 - Relative 
 - Absolute
 
+```
 Important difference in Windows setwd (c : \\users\ \Andrew\ \Downloads 11 )
+```
 
 ### Checking for and creating directories
 
@@ -362,4 +364,244 @@ doc <- htmlTreeParse(webData, useInternal=TRUE)
 scores <- xpathSApply(doc,"/html/body/div[1]/div/div/div/main/div[2]/div[5]/div/div/section/div/div[9]/div[1]",xmlValue)
 scores
 ```
+
+## Reading JSON
+
+### JSON
+
+Javascript Object Notation
+Lightweight data storage
+Common format for data from application programming interfaces (APls)
+Similar structure to XML but different syntax/format
+Data stored as
+- Numbers (double)
+- Strings (double quoted)
+- Boolean ( true or false)
+- Array (ordered, comma separated enclosed in square brackets[])
+- Object (unorderd, comma separated collection of key:value pairs in curley brackets 0)
+fillp://en.wikipedia.org/wiki/JSON
+
+### Example JSON file
+
+```{r}
+repoURL <- "https://api.github.com/users/jtleek/repos"
+library(jsonlite)
+jsonData <- fromJSON(repoURL)
+names(jsonData)
+```
+
+```{r}
+names(jsonData$owner)
+```
+
+```{r}
+jsonData$owner$login
+```
+
+### Writing data frames to JSON
+
+```{r}
+myjson <- toJSON(iris,pretty = TRUE)
+cat(myjson)
+```
+
+### Convert back to JSON
+
+```{r}
+iris.from <- fromJSON(myjson)
+head(iris.from)
+```
+
+### Further resources
+
+
+http://www.json.o~
+A good tutorial on jsonlite - 1http://www.r-bloggers.com/new-package-jsonlite-a-smarter-js1on
+encoderdecoder~
+jsonlite vignette
+
+## The data.table Package
+
+### data.table
+
+lnherets from data.frame
+- All functions that accept data.frame work on data.table
+Written in C so it is much faster
+Much, much faster at subsetting, group, and updating
+
+### Create data tables just like data frames
+
+```{r}
+library(data.table)
+DF <- data.frame(x = rnorm(9),
+                 y = rep(c("a", "b", "c"), each = 3),
+                 z = rnorm(9))
+```
+
+
+```{r}
+head(DF,3)
+```
+
+```{r}
+DT = data.table(x=rnorm(9) ,y=rep(c( "a", "b", "c") ,each=3) ,z=rnorm(9))
+head(DT,3)
+```
+
+### See all the data tables in memory
+
+```{r}
+tables()
+```
+
+```{r}
+DT[2,]
+```
+
+```{r}
+DT[DT$y=="a",]
+```
+
+### Subsetting rows
+
+```{r}
+DT[c(2,3)]
+```
+
+### Subsetting columns!?
+
+```{r}
+DT[,c(2,3)]
+```
+
+
+### Column subsetting in data.table
+
+The subsetting function is modified for data.table
+The argument you pass after the comma is called an 11expression11
+In R an expression is a collection of statements enclosed in curley brackets
+
+```{r}
+{
+  X = 1
+  y = 2
+}
+k = {print(10); 5}
+```
+
+```{r}
+print(k)
+```
+
+### Calculatingv aluesf or variablesw ith expressions
+
+```{r}
+DT[,list(mean(x),sum(z))]
+```
+
+```{r}
+DT[ ,table(y)]
+```
+
+### Adding new columns
+
+```{r}
+DT[,w:=z^2]
+head(DT)
+```
+
+```{r}
+DT2 <- DT
+DT[,y:=2]
+head(DT)
+```
+```{r}
+head(DT,n=3)
+```
+
+```{r}
+head(DT2,n=3)
+```
+
+
+### Multiple operations
+
+```{r}
+DT[,m:= {tmp <- (x+z); log2(tmp+5)}]
+head(DT)
+```
+
+### plyr like operations
+
+```{r}
+DT[ ,a:=x>0]
+head(DT)
+```
+
+```{r}
+DT[ ,b:= mean(x+w) ,by=a]
+head(DT)
+```
+
+### Special variables
+
+N An integer, length 1, containing the number 
+
+```{r}
+set.seed(123)
+DT <- data.table(x=sample(letters[1:3],1E5,TRUE))
+head(DT)
+```
+
+```{r}
+DT[,.N,by=x]
+```
+
+### Keys
+
+```{r}
+DT <- data.table(x=rep(c("a","b","c"),each=100), y=rnorm(300))
+head(DT)
+```
+```{r}
+setkey(DT,x)
+```
+
+```{r}
+DT["a"]
+```
+
+### Joins
+
+```{r}
+DTl <- data.table(x=c('a', 'a', 'b', 'dtl'), y=1:4)
+DT2 <- data.table(x=c('a', 'b', 'dt2'), z=5:7)
+setkey(DTl, x); setkey(DT2, x)
+merge(DTl, DT2)
+```
+
+
+### Fast reading
+
+```{r}
+big_df <- data.frame(x=rnorm(1E6), y=rnorm(1E6))
+file<- tempfile()
+write.table(big_df, file=file, row.names=FALSE, col.names=TRUE, sep="\t", quote=FALSE)
+system.time(fread(file))
+```
+
+```{r}
+system.time(read.table(file, header=TRUE, sep="\t"))
+```
+
+### Summary and further reading
+
+The latest development version contains new functions like melt and dcast for data.tables
+- lhttps://r-forge.r-project.org/scm/viewvc.php/pkg/NEWS?view=markup&root=datatable
+Here is a list of differences between data.table and data.frame
+- htt ://stackoverflow.com/ uestions/13618488/what- au-can-do-with-data-frame-that- ou-cantli
+n-data-table
+Notes based on Raphael Gottardo's notes https://github.com/raphg/Bios@,
+578/blob/master/Advanced_data_manipulation.Rpres, who got them from Kevin Ushey.
+
 
