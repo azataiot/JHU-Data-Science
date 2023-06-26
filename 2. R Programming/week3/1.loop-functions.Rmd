@@ -1,0 +1,402 @@
+---
+title: "1. Loop Functions"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+
+# 1. Loop Functions
+
+Looping on the Command Line
+
+Writing for, while loops is useful when programming but not particularly easy when working interactively on the command line. There are some functions which implement looping to make life easier. 
+
+· lapply: Loop over a list and evaluate a function on each element  (list) - return list
+· sapply: Same as lapply but try to simplify the result   (simple)
+· apply: Apply a function over the margins of an array    (apply - on row or col of a matrix)
+· tapply: Apply a function over subsets of a vector   (table - on a sub set)
+· mapply: Multivariate version of lapply    (multivariate)
+An auxiliary function split is also useful, particularly in conjunction with lapply.
+
+##lapply
+
+lapply takes three arguments: (1) a list X; (2) a function (or the name of a function) FUN; (3) other arguments via its ... argument. If X is not a list, it will be coerced to a list using as.list.
+
+```{r}
+lapply
+```
+
+The actual looping is done internally in C code. 
+
+lapply always returns a list, regardless of the class of the input. 
+
+```{r}
+x <- list(a = 1:5, b = rnorm(10))
+x
+```
+```{r}
+lapply(x, mean)
+```
+
+```{r}
+x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
+x
+```
+
+```{r}
+lapply(x, mean)
+```
+
+```{r}
+x<-1:4
+x
+```
+
+```{r}
+# The runif function in R generates random numbers from a uniform distribution.
+lapply(x, runif) # r: random , unif : uniform
+```
+
+```{r}
+hist(runif(5))
+```
+
+```{r}
+hist(runif(100000))
+```
+
+```{r}
+x<-1:4
+x
+```
+```{r}
+lapply(x, runif, min = 0, max = 10)
+```
+
+lapply and friends make heavy use of anonymous functions. 
+
+```{r}
+x <- list(a = matrix(1:4, 2, 2), b = matrix(1:6, 3, 2))
+x
+```
+
+An anonymous function for extracting the first column of each matrix.
+
+```{r}
+lapply(x, function(elt) elt[,1])
+```
+
+## sapply 
+
+sapply will try to simplify the result of lapply if possible.
+· If the result is a list where every element is length 1, then a vector is returned
+· If the result is a list where every element is a vector of the same length (> 1), a matrix is returned.
+· If it can’t figure things out, a list is returned
+
+```{r}
+x <- list(a = 1:4, b = rnorm(10), c = rnorm(20, 1), d = rnorm(100, 5))
+x
+```
+
+```{r}
+lapply(x, mean)
+```
+
+```{r}
+sapply(x, mean)
+```
+
+```{r}
+class(lapply(x, mean))
+class(sapply(x, mean))
+```
+
+```{r, error=TRUE}
+mean(x)
+```
+
+## apply 
+
+apply is used to a evaluate a function (often an anonymous one) over the margins of an array.
+· It is most often used to apply a function to the rows or columns of a matrix
+· It can be used with general arrays, e.g. taking the average of an array of matrices
+· It is not really faster than writing a loop, but it works in one line!
+
+
+```{r}
+str(apply)
+```
+
+X is an array
+· MARGIN is an integer vector indicating which margins should be “retained”. · FUN is a function to be applied
+· ... is for other arguments to be passed to FUN
+
+The MARGIN argument in the apply function in R indicates the dimension over which the function should be applied.
+
+MARGIN can take the following values:
+
+MARGIN = *1*: The function is applied over *rows*.
+MARGIN = *2*: The function is applied over *columns*.
+MARGIN = c(1, 2): The function is applied to each element of the array/matrix.
+
+```{r}
+x <- matrix(rnorm(200), 20, 10)
+x
+```
+```{r}
+apply(x, 2, mean) # apply over columns, we have 10 columns
+```
+
+```{r}
+apply(x, 1, sum) # apply over 20 rows
+```
+
+### col/row sums and means
+
+For sums and means of matrix dimensions, we have some shortcuts.
+· rowSums = apply(x, 1, sum)
+· rowMeans = apply(x, 1, mean) 
+· colSums = apply(x, 2, sum)
+· colMeans = apply(x, 2, mean)
+The shortcut functions are much faster, but you won’t notice unless you’re using a large matrix. 
+
+### Other Ways to Apply
+
+Quantiles of the rows of a matrix. 
+
+```{r}
+x <- matrix(rnorm(200), 20, 10)
+x
+```
+```{r}
+apply(x, 1, quantile, probs = c(0.25, 0.75))
+```
+
+The probs parameter in the quantile function specifies the probabilities for which you want to find the quantiles.
+
+### Average matrix in an array
+
+```{r}
+a <- array(rnorm(2 * 2 * 10), c(2, 2, 10))
+a
+```
+```{r}
+apply(a, c(1, 2), mean)
+```
+
+```{r}
+rowMeans(a, dims = 2)
+```
+
+## mapply
+
+mapply is a multivariate apply of sorts which applies a function in parallel over a set of arguments.
+
+
+```{r}
+str(mapply)
+```
+
+FUN is a function to apply
+· ... contains arguments to apply over
+· MoreArgs is a list of other arguments to FUN.
+· SIMPLIFY indicates whether the result should be simplified
+
+The following is tedious to type
+
+```{r}
+list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
+```
+
+
+Instead we can do
+
+```{r}
+mapply(rep, 1:4, 4:1)
+```
+
+
+### Vectorizing a Function
+
+```{r}
+noise <- function(n, mean, sd) {
+  rnorm(n, mean, sd)
+}
+```
+
+```{r}
+noise(5, 1, 2)
+```
+
+```{r}
+noise(1:5, 1:5, 2) # this is not the correct way, look for the next one
+```
+
+
+### Instant Vectorization
+
+```{r}
+mapply(noise, 1:5, 1:5, 2)
+```
+
+Which is the same as 
+
+```{r}
+list(noise(1, 1, 2),
+     noise(2, 2, 2),
+     noise(3, 3, 2),
+     noise(4, 4, 2),
+     noise(5, 5, 2))
+```
+
+
+## tapply 
+
+tapply is used to apply a function over subsets of a vector. I don’t know why it’s called tapply. 
+
+```{r}
+str(tapply)
+```
+
+· X is a vector
+· INDEX is a factor or a list of factors (or else they are coerced to factors)
+· FUN is a function to be applied
+· ... contains other arguments to be passed FUN
+· simplify, should we simplify the result?
+
+Take group means.
+
+```{r}
+x <- c(rnorm(10), runif(10), rnorm(10, 1))
+x
+```
+
+```{r}
+f<-gl(3,10)
+f
+```
+The gl() function in R generates factors by specifying the pattern of their levels. The function stands for "generate levels".
+
+In your case, f <- gl(3,10) generates a factor f of length 30 (3*10), with three levels, each repeating 10 times. Here, 3 is the number of levels, and 10 is the number of replications of each level.
+
+```{r}
+tapply(x, f, mean)
+```
+Take group means without simplification.
+
+```{r}
+tapply(x, f, mean, simplify = FALSE)
+```
+
+Find group ranges.
+
+```{r}
+tapply(x, f, range)
+```
+
+## split 
+
+split takes a vector or other objects and splits it into groups determined by a factor or list of factors.
+
+```{r}
+str(split)
+```
+
+· x is a vector (or list) or data frame
+· f is a factor (or coerced to one) or a list of factors
+· drop indicates whether empty factors levels should be dropped
+
+```{r}
+x <- c(rnorm(10), runif(10), rnorm(10, 1))
+f<-gl(3,10)
+split(x, f)
+```
+
+A common idiom is split followed by an lapply.
+
+```{r}
+lapply(split(x, f), mean)
+```
+
+### Splitting a Data Frame
+
+```{r}
+library(datasets)
+head(airquality)
+```
+
+```{r}
+s <- split(airquality, airquality$Month)
+head(s)
+```
+
+```{r}
+lapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")]))
+```
+
+```{r}
+sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")]))
+```
+
+```{r}
+sapply(s, function(x) colMeans(x[, c("Ozone", "Solar.R", "Wind")], na.rm = TRUE))
+```
+
+### Splitting on More than One Level
+
+```{r}
+x <- rnorm(10)
+x
+```
+
+```{r}
+f1<-gl(2,5)
+f1
+```
+
+```{r}
+f2<-gl(5,2)
+f2
+```
+
+```{r}
+interaction(f1, f2)
+```
+
+The interaction function in R generates a factor which represents the interaction of the given factors.
+
+The interaction(f1, f2) function will return a new factor representing all combinations of f1 and f2.
+
+The resulting factor has 10 levels, corresponding to all combinations of the levels in f1 and f2. Note that the levels are ordered first by the levels of f1, then by the levels of f2. This can be useful in statistical analyses where the interaction between factors is of interest.
+
+Interactions can create empty levels. 
+
+
+```{r}
+list(f1, f2)
+```
+
+```{r}
+str(split(x, list(f1, f2)))
+```
+Empty levels can be dropped.
+
+```{r}
+str(split(x, list(f1, f2), drop = TRUE))
+```
+
+
