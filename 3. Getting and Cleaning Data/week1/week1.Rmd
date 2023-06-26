@@ -214,6 +214,34 @@ values, setting quote="" often resolves these.
 str(read.table)
 ```
 
+## Reading Excel Files
+
+### read.xlsx(), read.xlsx2(), {xlsx package}
+
+```{r, error=TRUE}
+library(xlsx)
+```
+### Reading specific rows and columns 
+
+```{r,error=TRUE}
+colIndex <- 2:3
+rowIndex <- 1:4
+cameraDataSubset <-
+  read.xlsx(
+    "data/data.xlsx",
+    sheetIndex = 1,
+    colIndex = colIndex,
+    rowIndex = rowIndex
+  )
+```
+
+### Further notes
+
+- The write.xlsx function will write out an Excel file with similar arguments.
+- read.xlsx2 is much faster than read.xlsx but for reading subsets of rows may be slightly unstable.
+- XLConnect package has more options for writing and manipulating Excel files.
+- XLConnect vignette is a good place to start for that pakkcgae
+- In general it is advised to store your data in eigher a database or in a comma seperated files (.csv) or tab separated files (.tab/.txt) as they are easier to distribute.
 
 
 
