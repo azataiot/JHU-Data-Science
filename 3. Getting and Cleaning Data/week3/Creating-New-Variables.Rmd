@@ -1,0 +1,164 @@
+---
+title: "Creating New Variables"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+# Creating New Variables
+
+## Why create new variables ?
+
+Often the raw data won't have a value you are looking for
+You will need to transform the data to get the values you would like
+Usually you will add those values to the data frames you are working with
+Common variables to create
+- Missingness indicators
+- "Cutting up" quantitative variables
+- Applying transforms
+
+## Creating sequences
+
+Sometimes you need an index for your data set
+
+```{r}
+s1 <- seq(1,10,by=2)
+s1
+```
+
+```{r}
+s2 <- seq(1,10,length=3)
+s2
+```
+
+```{r}
+x <- c(1,3,8,25,100); 
+seq(along = x)
+```
+When you use the along argument in the seq() function, it generates a sequence from 1 to the length of the object you have specified.
+
+
+## Subsetting variables
+
+```{r,error=TRUE}
+rest <- read.csv("./data/rest.csv")
+```
+
+
+```{r}
+rest$nearme <- rest$nghbrhd %in% c("Roland Park","Homeland")
+```
+
+```{r}
+table(rest$nearme)
+```
+
+## Creating binary variables
+
+```{r}
+rest$zipWrong <- ifelse(rest$zipcode < 0, TRUE, FALSE)
+table(rest$zipWrong, rest$zipcode < 0)
+```
+
+## Creatingc ategoricavl ariables
+
+```{r}
+rest$zipcode <- as.numeric(rest$zipcode)
+```
+
+
+```{r, error=TRUE}
+rest$zipGroups <- cut(rest$zipcode, breaks = quantile(rest$zipcode))
+table(rest$zipGroups)
+```
+
+## Easier cutting
+
+```{r}
+library(Hmisc)
+```
+
+```{r,error=TRUE}
+rest$zipGroups <- cut2(rest$zipcode, g=4)
+```
+
+## Creating factor variables
+
+```{r,error=TRUE}
+rest$zcf <- factor(rest$zipcode)
+rest$zcf[1:10]
+```
+
+```{r}
+class(rest$zcf)
+```
+
+## Levels of factor variables
+
+```{r}
+yesno <- sample(c("yes", "no"), size = 10, replace = TRUE)
+yesnofac <- factor(yesno, levels = c("yes","no"))
+```
+
+```{r}
+yesno
+```
+
+
+```{r}
+yesnofac
+```
+
+```{r}
+relevel(yesnofac, ref = "yes")
+```
+
+```{r}
+as.numeric(yesnofac)
+```
+
+## Using the mutate function
+
+```{r}
+library(Hmisc)
+library(plyr)
+rest2 <- mutate(rest, zipGroups=cut2(zipcode, g=4))
+```
+
+
+```{r}
+table(rest2$zipGroups)
+```
+
+The mutate() function is a part of the dplyr package (and also available in plyr) in R. It's used to create new variables or modify existing ones in a data frame.
+
+```{r}
+str(mutate)
+```
+
+## Common transforms
+
+`abs` ( x) absolute value
+`sqrt` ( x) square root
+`ceiling` ( x) ceiling(3.475) is 4
+`floor` ( x) floor(3.475) is 3
+`round` ( x, digi ts=n) roun(3.475,digits=2) is 3.48
+`signif` ( x, digi ts=n) signif(3.475,digits=2) is 3.5
+`cos(x)`, sin(x) etc.
+`log ( x)` natural logarithm
+`log2 ( x)`, logl o ( x) other common logs
+`exp ( x)` exponentiating x
+
