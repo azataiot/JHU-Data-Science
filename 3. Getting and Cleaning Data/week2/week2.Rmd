@@ -280,4 +280,65 @@ httr works well with Facebook, Google, Twitter, Githb, etc.
 
 Authenticate -> Connect -> retrive -> convert JSON -> consume 
 
+## Reading From Other Sources 
 
+### There is a package for that
+
+Roger has a nice video on how there are R packages for most things that you will want to access.
+Here l1m going to briefly review a few useful packages
+In general the best way to find out if the R package exists is to Google 11data storage mechanism R
+package11
+- For example: 11MySQL R package11
+
+### Interactingm ore directlyw ith files
+
+file - open a connection to a text file
+url - open a connection to a url
+gzfile - open a connection to a .gz file
+bzfile - open a connection to a .bz2 file
+?connections for more information
+Remember to close connections
+
+### foreign package
+
+Loads data from Minitab, S, SAS, SPSS, Stata,Systat
+Basic functions read.too
+- read.arff (Weka)
+- read.dta (Stata)
+- read.mtp (Minitab)
+- read.octave (Octave)
+- read.spss (SPSS)
+- read.xport (SAS)
+See the help page for more details lhttp://cran.r-project.org/web/packages/foreign/foreign.pdf
+
+### Examples of other database packages
+
+RPostresSQL provides a DBI-compliant database
+Tutorial-https://code.google.com/p/rpostgre~, help
+project.org/web/packages/RPostgreSQURPostgreSQL.pdf
+connection from R.
+file-[nttp://cra[B
+RODBC provides interfaces to multiple databases including PostgreQL, MySQL, Microsoft Access
+and SQLite. Tutorial - ffi!p://cran.r-project.org/web/packages/RODBC/vignettes/RODBC.pdf, help
+file - http://cran.r-project.org/web/packages/RODBC/RODBC.pcflj
+RM on go lhttp://cran.r-project.org/web/packages/RMongo/RMongo.pd~ (example of Rmongo
+http://www.r-bloggers.com/r-and-mongodb/) and rmongodbl provide interfaces to MongoDb.
+
+
+### Reading images
+
+jpeg - ffi!p://cran.r-project.org/web/packages/jpeg/index.html
+readbitmap - lhttp://cran.r-project.org/web/packages/readbitmap/index.html
+png - http://cran.r-project.org/web/packages/png/i ndex. htm I
+EBlmage (Bioconductor) - http://www.bioconductor.org/packages/2.13/bioc/html/EBlmage.htmll
+
+### Reading GIS data
+
+rd gal - http://cran.r-project.org/web/packages/rgdal/index. hTm]
+rgeos - lhttp://cran.r-project.org/web/packages/rgeos/index.htmll
+raster - [nttp://cran.r-project.org/web/packages/raster/index.html
+
+### Reading music data
+
+tu neR - lfittp: // cran.r -project.org/web/packages/tun ~
+seewave - http://rug.mnhn.fr/seewave
