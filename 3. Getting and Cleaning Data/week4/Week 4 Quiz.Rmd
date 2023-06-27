@@ -1,0 +1,84 @@
+---
+title: "Week 4 Quiz"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+# Week 4 Quiz
+
+```{r}
+us <- read.csv("data/us.csv")
+```
+
+```{r}
+head(us)
+```
+```{r}
+names(us)
+```
+
+
+```{r}
+q_names <- names(us)
+strsplit(q_names, "wgtp")[123]
+```
+
+```{r}
+gdp <- read.csv("data/gdp.csv",skip = 4)
+```
+
+```{r}
+head(gdp)
+```
+```{r}
+gdp <- gdp[,c(1,2,4,5)]
+```
+
+```{r}
+head(gdp)
+```
+
+
+
+```{r}
+colnames(gdp) <- c("code","rank","country","gdp")
+```
+
+```{r}
+head(gdp)
+```
+
+```{r}
+gpdStr <- gsub(",","",gdp$gdp)
+```
+
+```{r}
+dgpNum <- as.integer(gpdStr)
+```
+
+```{r}
+gdp$gdp <- dgpNum
+```
+
+```{r}
+head(gdp)
+```
+
+```{r}
+mean(gdp$gdp, na.rm = TRUE)
+```
+
