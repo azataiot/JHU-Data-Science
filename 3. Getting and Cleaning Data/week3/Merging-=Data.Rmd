@@ -1,0 +1,122 @@
+---
+title: "Merging Data"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+# Merging Data
+
+## Peer review data
+
+```{r}
+if(!file.exists("data")){dir.create("data")}
+```
+
+
+```{r}
+reviews = read.csv("./data/reviews.csv"); 
+solutions <- read.csv("./data/solutions.csv")
+head(reviews,2)
+```
+
+```{r}
+head(solutions,2)
+```
+
+
+## Merging data - merge()
+
+* Merges data frames
+* Important parameters: _x_,_y_,_by_,_by.x_,_by.y_,_all_
+
+```{r}
+names(reviews)
+```
+
+```{r}
+names(solutions)
+```
+
+```{r}
+mergedData <- merge(reviews, solutions, by.x = "solution_id", by.y = "id", all = TRUE)
+```
+
+
+```{r}
+head(mergedData)
+```
+
+
+## Default - merge all common column names
+
+
+```{r}
+intersect(names(reviews),names(solutions))
+```
+
+```{r}
+mergedData2 = merge(reviews,solutions,all=TRUE)
+head(mergedData2)
+```
+
+## Using join in the plyr package
+
+```{r}
+library(dplyr)
+```
+
+```{r}
+df1 <- data.frame(id=sample(1:10), x=rnorm(10))
+df2 <- data.frame(id=sample(1:10), y=rnorm(10))
+```
+
+
+```{r}
+head(df1)
+```
+
+```{r}
+head(df2)
+```
+
+
+_Faster, but less full featured - defaults to left join, see help file for more_
+
+```{r}
+library(plyr)
+```
+
+
+```{r}
+arrange(join(df1,df2),id)
+```
+
+## If you have multiple data frames
+
+```{r}
+df1 = data.frame(id=sample(1:10),x=rnorm(10))
+df2 = data.frame(id=sample(1:10),y=rnorm(10))
+df3 = data.frame(id=sample(1:10),z=rnorm(10))
+dfList = list(df1,df2,df3)
+join_all(dfList)
+```
+
+## More on merging data
+
+* The quick R data merging page - [http://www.statmethods.net/management/merging.html](http://www.statmethods.net/management/merging.html)
+* plyr information - [http://plyr.had.co.nz/](http://plyr.had.co.nz/)
+* Types of joins - [http://en.wikipedia.org/wiki/Join_(SQL)](http://en.wikipedia.org/wiki/Join_(SQL))
