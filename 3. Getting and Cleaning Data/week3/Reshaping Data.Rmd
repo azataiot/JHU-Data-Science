@@ -1,0 +1,109 @@
+---
+title: "Reshaping Data"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+# Reshaping Data
+
+## The goal is tidy data 
+
+1. 	Each variable forms a column
+2. 	Each observation forms a row
+3. 	Each table/file stores data about one kind of observation (e.g. people/hospitals).
+
+## Start with reshaping 
+
+```{r}
+library(reshape2)
+head(mtcars)
+```
+
+## Melting data frames
+
+```{r}
+mtcars$carname <- rownames(mtcars)
+carMelt <- melt(mtcars, id=c("carname","gear","cyl"), measure.vars=c("mpg","hp"))
+head(carMelt)
+```
+
+```{r}
+tail(carMelt)
+```
+
+## Casting data frames
+
+```{r}
+cylData <- dcast(carMelt, cyl ~ variable)
+cylData
+```
+
+```{r}
+cylData <- dcast(carMelt, cyl ~ variable, mean)
+cylData
+```
+
+The dcast() function in R is used to reshape data from long to wide format. It is a part of the 'reshape2' or 'data.table' package. Here is what it does in your specific context:
+
+
+In this line, you're applying the dcast() function to the carMelt data frame. The argument cyl ~ variable indicates that you want to reshape your data so that you have one row for each unique value of cyl (cylinder), and one column for each unique value of variable.
+
+The function that follows (mean) is applied to all cells in the data frame that correspond to a given (cyl, variable) pair. So, for instance, if your carMelt data frame has several rows for cyl = 4 and variable = 'mpg', then the dcast() function will take the mean of all these rows and put this value in the cell that corresponds to (cyl = 4, variable = 'mpg') in the new data frame.
+
+
+## Averaging values
+
+```{r}
+head(InsectSprays)
+```
+
+```{r}
+tapply(InsectSprays$count, InsectSprays$spray, sum)
+```
+
+## Another way - split
+
+```{r}
+spins <- split(InsectSprays$count, InsectSprays$spray)
+spins
+```
+
+
+## Another way - apply
+
+
+```{r}
+sprCount = lapply(spins,sum)
+sprCount
+```
+
+## Another way - combine
+
+```{r}
+unlist(sprCount)
+```
+
+```{r}
+sapply(spins, sum)
+```
+
+## Another way - plyr package
+
+```{r,error=TRUE}
+ddply(InsectSprays,.(spray),summarize,sum=ave(count,FUN = sum))
+```
+
