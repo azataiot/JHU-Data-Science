@@ -198,12 +198,75 @@ h5read("example.h5","foo/A")
 ```
 
 
+## Reading from The Web
+
+### Webscraping
+
+Webscraping: Programatically extracting data from the HTML code of websites.
+It can be a great way to get data How Netflix reverse engineered Hollywood
+Many websites have information you may want to programaticaly read
+In some cases this is against the terms of service for the website
+Attempting to read too many pages too quickly can get your IP address blocked
+
+### Getting data off webpages - readlinesO
+
+```{r,error=TRUE}
+con <- url("https://scholar.google.com/citations?user=HI-I6C0AAAAJ&hl=en")
+htmlCode <- readLines(con)
+close(con)
+htmlCode
+```
+
+### Parsing with XML
+
+```{r}
+library(XML)
+```
+
+```{r}
+html <- htmlTreeParse(htmlCode, useInternalNodes = T)
+
+xpathSApply(html,"//title",xmlValue)
+```
+
+```{r}
+xpathSApply(html,"//td[@id='col-citedby']",xmlValue)
+```
+
+### GET from the httr package
+
+```{r}
+library(httr)
+```
+
+```{r,error=TRUE}
+html2 = GET(url)
+content2 <- content(html2,as="text")
+parsedHTML <- htmlParse(content2,asText = TRUE)
+xpathSApply(parsedHTML,"//title",xmlValue)
+```
+
+### Accessing websites with passwords
+
+```{r}
+pg1 = GET("http://httpbin.org/basic-auth/user/passwd")
+pg1
+```
 
 
+```{r,error=TRUE}
+pg2 = GET("http://httpbin.org/basic-auth/user/passwd",
+authenticate( "user", "passwd"))
+pg2
+```
 
 
+### Using handles 
 
-
-
+```{r}
+google = handle("http://google.com")
+pgl = GET(handle=google,path="/")
+pg2 = GET(handle=google,path="search")
+```
 
 
