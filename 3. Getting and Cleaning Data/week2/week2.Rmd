@@ -270,3 +270,14 @@ pg2 = GET(handle=google,path="search")
 ```
 
 
+## Reading From APIs
+
+In general look at the documentation
+httr allows GET, POST, PUT, DELETE requests if you are authorized
+You can authenticate with a user name or a password
+Most modern APls use something like oauth
+httr works well with Facebook, Google, Twitter, Githb, etc.
+
+Authenticate -> Connect -> retrive -> convert JSON -> consume 
+
+
