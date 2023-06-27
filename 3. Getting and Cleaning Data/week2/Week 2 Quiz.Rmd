@@ -1,19 +1,182 @@
 ---
 title: "Week 2 Quiz"
-output: html_notebook
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+# Week 2 Quiz
 
 ```{r}
-plot(cars)
+library(httr)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+```{r}
+oauth_endpoints("github")
+```
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+```{r}
+myapp <- oauth_app("github",
+  key = "be8ac194725cb8033946",
+  secret = "f0a118015cb1f303548bbd72006342db8054d5e8"
+)
+```
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```{r}
+github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+```
+
+```{r}
+gtoken <- config(token = github_token)
+req <- GET("https://api.github.com/rate_limit", gtoken)
+stop_for_status(req)
+content(req)
+```
+
+```{r}
+
+```
+
+```{r}
+gtoken <- config(token = github_token)
+req <- GET("https://api.github.com/repos/jtleek/datasharing", gtoken)
+stop_for_status(req)
+content(req)
+```
+
+```{r}
+library(jsonlite)
+```
+
+```{r}
+# parse the JSON response
+data <- content(req, as = "parsed", type = "application/json")
+```
+
+```{r}
+data
+```
+
+```{r}
+# parse the JSON response
+data <- content(req, as = "parsed", type = "application/json")
+
+# extract and print the creation time
+created_at <- data$created_at
+print(created_at)
+```
+
+```{r}
+acs <- read.csv("data/getdata_data_ss06pid.csv")
+```
+
+```{r}
+head(acs)
+```
+
+```{r}
+unique(acs$AGEP)
+```
+
+```{r,error=TRUE}
+library(sqldf)
+```
+
+
+```{r}
+sqldf("select distinct AGEP from acs")
+```
+
+```{r}
+con <- url("https://biostat.jhsph.edu/~jleek/contact.html")
+htmlCode <- readLines(con)
+close(con)
+htmlCode
+```
+
+```{r}
+nchar(htmlCode)
+```
+
+```{r}
+nchar(htmlCode)[10]
+```
+
+```{r}
+nchar(htmlCode)[20]
+```
+
+```{r}
+nchar(htmlCode)[30]
+```
+```{r}
+nchar(htmlCode)[100]
+```
+
+```{r}
+str(read.table)
+```
+
+```{r}
+con <- file("data/getdata_wksst8110.for")
+lines <- readLines(con)
+close(con)
+```
+
+```{r}
+lines[1]
+```
+```{r}
+lines[2]
+```
+```{r}
+lines[3]
+```
+```{r}
+lines[4]
+```
+```{r}
+lines[5]
+```
+
+
+```{r}
+# Read in the lines
+lines <- readLines("data/getdata_wksst8110.for")
+# Remove the first three lines
+lines <- lines[-(1:4)]
+```
+
+```{r}
+lines[1]
+```
+
+```{r}
+line <- strsplit(lines[1], "\\s{8}")[[1]]
+```
+
+```{r}
+line <- line[line !=""]
+```
+
+```{r}
+line
+```
+
+```{r}
+
+```
 
