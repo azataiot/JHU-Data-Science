@@ -1,0 +1,100 @@
+---
+title: "Weekl 2"
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: 6
+    number_sections: yes
+    latex_engine: xelatex
+    df_print: kable
+    highlight: tango
+  html_notebook: default
+  html_document:
+    toc: yes
+    toc_depth: '6'
+    df_print: paged
+  word_document:
+    toc: yes
+    toc_depth: '6'
+---
+
+# Week 2
+
+## Reading from MySQL
+
+### mySQL 
+
+Free and widely used open source database software
+Widely used in internet based applications
+Data are structured in
+- Databases
+- Tables within databases
+- Fields within tables
+Each row is called a record
+
+### Connecting and listing databases
+
+```{r}
+library(RMySQL)
+ucscDb <-
+  dbConnect(MySQL(), user = "genome", host = "genome-mysql.cse.ucsc.edu")
+result <- dbGetQuery(ucscDb, "show databases;")
+
+dbDisconnect(ucscDb)
+
+```
+
+```{r}
+result
+```
+
+### Connecting to hg19 and listing tables
+
+```{r}
+hg19 <- dbConnect(MySQL(),user="genome", db="hg19",host="genome-mysql.cse.ucsc.edu")
+allTables <- dbListTables(hg19)
+length(allTables)
+```
+
+```{r}
+allTables[1:5]
+```
+
+### Get dimensions of a specific table
+
+```{r}
+dbListFields(hg19,"affyU133Plus2")
+```
+
+```{r}
+dbGetQuery(hg19, "select count(*) from affyU133Plus2")
+```
+
+### Read from the table
+
+```{r,error=TRUE}
+affyData <- dbReadTable(hg19, "affyU133Plus2")
+head(affyData)
+```
+
+### Select a specific subset
+
+```{r,error=TRUE}
+query<- dbSendQuery(hg19, "select * from affyU133Plus2 where misMatches between 1 and 3")
+affyMis <- fetch(query); quantile(affyMis$rnisMatches)
+```
+```{r,error=TRUE}
+affyMisSmall <- fetch(query, n = lO)
+
+dbClearResult(query)
+```
+```{r,error=TRUE}
+dirn(affyMisSmall)
+```
+
+### Don't forget to close the connection
+
+```{r}
+dbDisconnect(hg19)
+```
+
