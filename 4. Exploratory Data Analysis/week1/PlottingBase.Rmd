@@ -289,3 +289,26 @@ with(airquality, {
 
 * The base plotting system is very flexible and offers a high degree
   of control over plotting
+```{r}
+x <- rnorm(100)
+hist(x)
+```
+
+```{r}
+y <- rnorm(100)
+z <- rnorm(100)
+```
+```{r}
+plot(x,y)
+```
+```{r}
+plot(x,z)
+```
+```{r}
+plot(x,y, pch = 20)
+```
+```{r}
+example(points)
+```
+
+
