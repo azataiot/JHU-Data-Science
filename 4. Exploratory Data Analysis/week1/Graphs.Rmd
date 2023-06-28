@@ -1,0 +1,80 @@
+---
+title: "Graphs"
+output:
+pdf_document:
+toc: yes
+toc_depth: 6
+number_sections: yes
+latex_engine: xelatex
+df_print: kable
+highlight: tango
+html_notebook: default
+html_document:
+toc: yes
+toc_depth: '6'
+df_print: paged
+word_document:
+toc: yes
+toc_depth: '6'
+---
+
+# Graphs
+
+
+```{r readpm25data}
+pollution <- read.csv("data/avgpm25.csv", colClasses = c("numeric", "character", "factor", "numeric", "numeric"))
+names(pollution)
+```
+
+```{r}
+str(pollution) ; str(pollution)
+```
+
+```{r}
+visdat::vis_dat(pollution)
+```
+
+```{r}
+visdat::vis_miss(pollution)
+```
+```{r}
+boxplot(pollution$pm25, col = "blue")
+```
+```{r}
+hist(pollution$pm25, col = "green")
+```
+```{r}
+hist(pollution$pm25, col = "green", breaks = 100)
+rug(pollution$pm25)
+```
+```{r}
+boxplot(pollution$pm25, col = "blue")
+abline(h=12)
+```
+```{r}
+cat("aa")
+```
+```{r}
+barplot(table(pollution$region),col = "wheat", main = "Number of Countries in Each Region")
+```
+```{r}
+table(pollution$region)
+```
+```{r}
+boxplot(pm25 ~ region, data = pollution, col = "red")
+```
+
+par can be used to set or query graphical parameters. Parameters can be set by specifying them as arguments to par in tag = value form, or by passing them as a list of tagged values.
+
+mfcol, mfrow
+A vector of the form c(nr, nc). Subsequent figures will be drawn in an nr-by-nc array on the device by columns (mfcol), or rows (mfrow), respectively.
+In a layout with exactly two rows and columns the base value of "cex" is reduced by a factor of 0.83: if there are three or more of either rows or columns, the reduction factor is 0.66.
+
+
+
+```{r}
+par(mfrow = c(2,1), mar = c(4,4,2,1)) # 2 row 1 col
+hist(subset(pollution, region = "west")$pm25, col = "green")
+hist(subset(pollution, region = "east")$pm25, col = "green")
+```
+
