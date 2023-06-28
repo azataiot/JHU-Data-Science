@@ -1,0 +1,40 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(nlme)
+library(lattice)
+xyplot(weight ~ Time | Diet, BodyWeight)
+```
+```{r}
+library(lattice)
+library(datasets)
+data(airquality)
+p <- xyplot(Ozone ~ Wind | factor(Month), data = airquality)
+```
+```{r}
+library(datasets)
+data(airquality)
+```
+```{r}
+airquality = transform(airquality, Month = factor(Month))
+qplot(Wind, Ozone, data = airquality, facets = . ~ Month)
+```
+```{r}
+qplot(Wind, Ozone, data = airquality)
+```
+```{r}
+qplot(Wind, Ozone, data = airquality, facets = . ~ factor(Month))
+```
+```{r}
+qplot(Wind, Ozone, data = airquality, geom = "smooth")
+```
+```{r}
+library(ggplot2)
+library(ggplot2movies)
+g <- ggplot(movies, aes(votes, rating))
+g + geom_point()
+print(g)
+```
