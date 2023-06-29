@@ -1,0 +1,131 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+pm0 <- read.table("pm25_data/RD_501_88101_1999-0.txt", comment.char = "#", header = FALSE, sep = "|", na.strings = "NA")
+```
+```{r}
+cnames <- readLines("pm25_data/RD_501_88101_1999-0.txt",1)
+cnames
+```
+```{r}
+cnames <- strsplit(cnames, "|", fixed = TRUE) # split the string into a list of strings, each string is a column name, fixed = TRUE means the split is based on the exact string "|"
+```
+```{r}
+class(cnames)
+```
+```{r}
+cnames
+```
+```{r}
+names(pm0) <- cnames[[1]] # assign the first element of the list cnames to the column names of pm0
+```
+```{r}
+head(pm0,6)
+```
+```{r}
+x0 <- pm0[, "Sample Value"]
+```
+```{r}
+class(x0)
+```
+```{r}
+summary(x0)
+```
+```{r}
+mean(is.na(x0))
+```
+```{r}
+```
+```{r}
+
+```
+```{r}
+
+```
+```{r}
+class(x0)
+```
+```{r}
+summary(x0)
+```
+```{r}
+pm1 <- read.table("pm25_data/RD_501_88101_2012-0.txt", comment.char = "#", header = FALSE, sep = "|", na.strings = "NA")
+```
+```{r}
+dim(pm1)
+```
+
+Number of rows * Number of columns * Memory size of data type
+```{r}
+1304287 * 28 * 8
+```
+```{r}
+names(pm1) <- cnames[[1]]
+```
+```{r}
+head(pm1,6)
+```
+```{r}
+x1 <- pm1[, "Sample Value"]
+```
+```{r}
+str(x1)
+```
+```{r}
+summary(x1)
+```
+```{r}
+summary(x0)
+```
+```{r}
+mean(is.na(x1))
+```
+```{r}
+boxplot(x0, x1, names = c("1999", "2012"))
+```
+```{r}
+boxplot(log10(x0), log10(x1))
+```
+```{r}
+negative <- x1 < 0
+```
+```{r}
+sum(negative, na.rm = TRUE)
+```
+```{r}
+mean(negative, na.rm = TRUE)
+```
+```{r}
+dates <- pm1$Date
+str(dates)
+```
+```{r}
+dates <- as.Date(as.character(dates), "%Y%m%d")
+str(dates)
+hist(dates, "month")  ## Check what's going on in months 1--6
+```
+```{r}
+## Plot a subset for one monitor at both times
+
+## Find a monitor for New York State that exists in both datasets
+site0 <- unique(subset(pm0, State.Code == 36, c(County.Code, Site.ID)))
+site1 <- unique(subset(pm1, State.Code == 36, c(County.Code, Site.ID)))
+```
+```{r}
+site0 <- paste(site0[,1], site0[,2], sep = ".") # paste the two columns together with a dot in between
+site1 <- paste(site1[,1], site1[,2], sep = ".") # paste the two columns together with a dot in between
+```
+```{r}
+## Find a monitor for New York State that exists in both datasets
+site0 <- unique(subset(pm0, pm0[,'State Code'] == 36, c("County Code", "Site ID")))
+site1 <- unique(subset(pm1, pm1[,'State Code'] == 36, c("County Code", "Site ID")))
+site0 <- paste(site0[,1], site0[,2], sep = ".")
+site1 <- paste(site1[,1], site1[,2], sep = ".")
+str(site0)
+str(site1)
+both <- intersect(site0, site1)
+print(both)
+```
