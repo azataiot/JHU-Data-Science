@@ -1,0 +1,31 @@
+ BEGIN:VCALENDAR
+PRODID:-//Coursera//Learner Study Calendar 1.0//EN
+NAME:Coursera Study Calendar
+X-WR-CALNAME:Coursera Study Calendar
+VERSION:2.0
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+DTSTAMP:20230629T112501Z
+DTSTART:20230627T143000
+DTEND:20230627T150000
+SUMMARY:Learning time - Computational Methods in Pricing and Model Calibr
+ ation
+UID:F33NELB2Eei5ZhIvnNMO1A~2023-06-29T11:25:01.505252542~courseraorg
+DESCRIPTION:Course: Computational Methods in Pricing and Model Calibratio
+ n\nhttps://www.coursera.org/learn/financial-engineering-computationalmet
+ hods/home/welcome
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20230813T205959Z;BYDAY=TU
+END:VEVENT
+BEGIN:VEVENT
+DTSTAMP:20230629T112501Z
+DTSTART:20230629T143000
+DTEND:20230629T150000
+SUMMARY:Learning time - Computational Methods in Pricing and Model Calibr
+ ation
+UID:F33NELB2Eei5ZhIvnNMO1A~2023-06-29T11:25:01.538734291~courseraorg
+DESCRIPTION:Course: Computational Methods in Pricing and Model Calibratio
+ n\nhttps://www.coursera.org/learn/financial-engineering-computationalmet
+ hods/home/welcome
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20230813T205959Z;BYDAY=TH
+END:VEVENT
+END:VCALENDAR
