@@ -111,8 +111,8 @@ hist(dates, "month")  ## Check what's going on in months 1--6
 ## Plot a subset for one monitor at both times
 
 ## Find a monitor for New York State that exists in both datasets
-site0 <- unique(subset(pm0, State.Code == 36, c(County.Code, Site.ID)))
-site1 <- unique(subset(pm1, State.Code == 36, c(County.Code, Site.ID)))
+# site0 <- unique(subset(pm0, State.Code == 36, c(County.Code, Site.ID)))
+# site1 <- unique(subset(pm1, State.Code == 36, c(County.Code, Site.ID)))
 ```
 ```{r}
 site0 <- paste(site0[,1], site0[,2], sep = ".") # paste the two columns together with a dot in between
@@ -128,4 +128,28 @@ str(site0)
 str(site1)
 both <- intersect(site0, site1)
 print(both)
+```
+```{r}
+pm0$country.site <- paste(pm0[,"County Code"], pm0[,"Site ID"], sep = ".")
+pm1$country.site <- paste(pm1[,"County Code"], pm0[,"Site ID"], sep = ".")
+```
+```{r}
+head(pm0)
+```
+```{r}
+pm0$State.Code <- pm0[,"State Code"]
+pm1$State.Code <- pm1[,"State Code"]
+```
+```{r}
+head(pm0)
+```
+```{r}
+cnt0 <- subset(pm0, State.Code == 36 & country.site %in% both) # subset the data frame pm0 to only include rows where State.Code is 36 and country.site is in both
+cnt1 <- subset(pm1, State.Code == 36 & country.site %in% both)
+```
+```{r}
+head(cnt0)
+```
+```{r}
+head(cnt1)
 ```

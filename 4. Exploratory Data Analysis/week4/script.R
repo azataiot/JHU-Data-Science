@@ -5,10 +5,10 @@
 
 ## Read in data from 1999
 
-pm0 <- read.table("RD_501_88101_1999-0.txt", comment.char = "#", header = FALSE, sep = "|", na.strings = "")
+pm0 <- read.table("pm25_data/RD_501_88101_1999-0.txt", comment.char = "#", header = FALSE, sep = "|", na.strings = "")
 dim(pm0)
 head(pm0)
-cnames <- readLines("RD_501_88101_1999-0.txt", 1)
+cnames <- readLines("pm25_data/RD_501_88101_1999-0.txt", 1)
 print(cnames)
 cnames <- strsplit(cnames, "|", fixed = TRUE)
 print(cnames)
